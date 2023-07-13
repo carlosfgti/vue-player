@@ -1,17 +1,10 @@
 <script setup lang="ts">
+import HeaderComponent from './components/Player/HeaderComponent.vue';
+
 </script>
 
 <template>
-  <header class="header_player">
-    <div class="header_home">
-
-    </div>
-    <nav class="button-group">
-      <button class="button button--outline">
-        Previous Lesson</button>
-      <button class="button button--primary">Complete and Continue</button>
-    </nav>
-  </header>
+  <HeaderComponent />
   <main>
     <iframe src="https://player.vimeo.com/video/841243728?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
       frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
