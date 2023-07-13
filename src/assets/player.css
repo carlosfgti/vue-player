@@ -1,0 +1,14 @@
+.player {
+    width: 100%;
+    min-height: calc(0.5625 * 100vw);
+    background-color: black;
+}
+
+/* PC */
+@media screen and (min-width: 768px) {
+    .player {
+        width: 100%;
+        flex-grow: 1;
+        min-height: calc(100vh - 48px);
+    }
+}

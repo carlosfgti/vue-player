@@ -1,0 +1,29 @@
+.button {
+    width: clamp(100px, 10vw, 300px);
+    height: 2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 4px;
+    font: var(--heading-2);
+}
+
+.button--primary {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.button--primary:hover {
+    background-color: #6200EE;
+}
+
+.button--outline {
+    background-color: transparent;
+    border: 1px solid var(--color-white);
+    color: white;
+}
+
+.button--outline:hover {
+    background-color: white;
+    border-color: white;
+    color: var(--color-secondary);
+}

@@ -1,0 +1,41 @@
+.header_player {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+
+    width: 100vw;
+    height: 48px;
+    
+    background-color: var(--color-secondary);
+}
+
+.header_home {
+    display: none;
+    min-width: clamp(240px, 30vw, 300px);
+    height: 48px;
+    border-bottom: 1px solid #363339;
+    border-right: 1px solid #363339;
+}
+
+@media screen and (min-width: 768px) {
+   .header_home {
+        display: flex;
+   }
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 1rem;
+
+    width: 100%;
+}
+
+.button-group > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(12px, 1vw, 16px);
+}

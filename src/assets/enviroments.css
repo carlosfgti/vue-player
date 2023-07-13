@@ -1,0 +1,13 @@
+:root {
+    /*COLORS*/
+    --color-primary: #8542FF;
+    --color-secondary: #1B181F;
+    --color-white: #FFFFFF;
+
+    /*TYPOGRAPHY*/
+    --font-family: Inter, sans-serif;
+    --heading-1: 700 24px var(--font-family);
+    --heading-2: 600 15px var(--font-family);
+    --body: 400 12px var(--font-family);
+    --body-bold: 700 12px var(--font-family);
+}
