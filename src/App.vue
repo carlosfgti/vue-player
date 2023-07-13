@@ -1,93 +1,13 @@
 <script setup lang="ts">
 import HeaderComponent from './components/Player/HeaderComponent.vue';
-
+import PlayerComponent from './components/Player/PlayerComponent.vue';
+import ContentComponent from './components/Player/ContentComponent.vue';
 </script>
 
 <template>
   <HeaderComponent />
   <main>
-    <iframe src="https://player.vimeo.com/video/841243728?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
-      frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen
-      title="Young.Sheldon.S05E09.1080p.WEB-DL.DUAL" class="player"></iframe>
-    <aside class="menu">
-      <div class="menu__title">
-        <h1>Aula - React</h1>
-        <div class="status__bar">
-          <div class="loading-background status__completed"></div>
-        </div>
-      </div>
-      <ul class="menu__category-list scrollable-element">
-        <li class="category-list__card">
-          <div class="category-card__title">
-            <h1>Módulo 1</h1>
-          </div>
-          <ul class="category-card__task-list">
-            <li class="task-list__card">
-              <input type="checkbox" name="completed" id="">
-              <p>Welcome to React.js</p>
-            </li>
-            <li class="task-list__card">
-              <input type="checkbox" name="completed" id="">
-              <p>States and immutability</p>
-            </li>
-            <li class="task-list__card">
-              <input type="checkbox" name="completed" id="">
-              <p>States and immutability</p>
-            </li>
-            <li class="task-list__card">
-              <input type="checkbox" name="completed" id="">
-              <p>States and immutability</p>
-            </li>
-            <li class="task-list__card">
-              <input type="checkbox" name="completed" id="">
-              <p>States and immutability</p>
-            </li>
-            <li class="task-list__card">
-              <input type="checkbox" name="completed" id="">
-              <p>States and immutability</p>
-            </li>
-            <li class="task-list__card">
-              <input type="checkbox" name="completed" id="">
-              <p>States and immutability</p>
-            </li>
-            <li class="task-list__card">
-              <input type="checkbox" name="completed" id="">
-              <p>States and immutability</p>
-            </li>
-            <li class="task-list__card">
-              <input type="checkbox" name="completed" id="">
-              <p>States and immutability</p>
-            </li>
-            <li class="task-list__card">
-              <input type="checkbox" name="completed" id="">
-              <p>States and immutability</p>
-            </li>
-            <li class="task-list__card">
-              <input type="checkbox" name="completed" id="">
-              <p>States and immutability</p>
-            </li>
-            <li class="task-list__card">
-              <input type="checkbox" name="completed" id="">
-              <p>States and immutability</p>
-            </li>
-          </ul>
-        </li>
-        <li class="category-list__card">
-          <div class="category-card__title">
-            <h1>Módulo 2</h1>
-          </div>
-          <ul class="category-card__task-list">
-            <li class="task-list__card">
-              <input type="checkbox" name="completed" id="">
-              <p>States and immutability</p>
-            </li>
-            <li class="task-list__card">
-              <input type="checkbox" name="completed" id="">
-              <p>States and immutability</p>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </aside>
+    <PlayerComponent />
+    <ContentComponent />
   </main>
 </template>
