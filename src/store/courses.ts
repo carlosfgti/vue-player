@@ -1,6 +1,5 @@
 import Course from '@/entities/Course'
 import CoursesGatewayHttp from '@/infra/gateway/CoursesGatewayHttp'
-import AxiosAdapter from '@/infra/http/AxiosAdapter';
 import { defineStore } from 'pinia'
 
 export const useCounterStore = defineStore('courses', {
@@ -12,10 +11,7 @@ export const useCounterStore = defineStore('courses', {
     },
     actions: {
       async getAllCourses(): Promise<Course[]> {
-        const courses = new CoursesGatewayHttp(
-            new AxiosAdapter(),
-            '/courses'
-        );
+        const courses = new CoursesGatewayHttp('/courses');
         return await courses.get();
       }
     },
