@@ -10,5 +10,6 @@ export default class Lesson {
       readonly origin: string,
       readonly free: boolean,
       readonly created_at: string,
+      readonly views: number,
     ) {}
 }
