@@ -1,5 +1,6 @@
 import type Course from "@/entities/Course";
 
 export default interface CoursesGateway {
-    get(): Promise<Course[]>;
+    getAll(): Promise<Course[]>;
+    get(): Promise<Course>;
 }

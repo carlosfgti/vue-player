@@ -12,7 +12,7 @@ export const useCounterStore = defineStore('courses', {
     actions: {
       async getAllCourses() {
         const CoursesGateway = new CoursesGatewayHttp('/courses');
-        this.courses = await CoursesGateway.get();
+        this.courses = await CoursesGateway.getAll();
       }
     },
 })

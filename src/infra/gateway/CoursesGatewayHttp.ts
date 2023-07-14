@@ -11,8 +11,11 @@ export default class CoursesGatewayHttp implements CoursesGateway {
 	) {
         this.httpClient = new AxiosAdapter()
     }
+    get(): Promise<Course> {
+        throw new Error("Method not implemented.");
+    }
 
-    get(): Promise<Course[]> {
+    getAll(): Promise<Course[]> {
         throw new Error("Method not implemented.");
     }
 }
