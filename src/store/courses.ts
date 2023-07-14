@@ -4,15 +4,15 @@ import { defineStore } from 'pinia'
 
 export const useCounterStore = defineStore('courses', {
     state: () => ({
-        courses: Array<Course>,
+        courses: [] as Course[],
     }),
     getters: {
       
     },
     actions: {
-      async getAllCourses(): Promise<Course[]> {
-        const courses = new CoursesGatewayHttp('/courses');
-        return await courses.get();
+      async getAllCourses() {
+        const CoursesGateway = new CoursesGatewayHttp('/courses');
+        this.courses = await CoursesGateway.get();
       }
     },
 })
