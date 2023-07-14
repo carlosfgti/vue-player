@@ -1,3 +1,5 @@
+import type Module from "./Module";
+
 export default class Course {
     constructor(
       readonly name: string,
@@ -12,5 +14,6 @@ export default class Course {
       readonly status: string,
       readonly free: boolean,
       readonly date: string,
+      readonly modules?: Module[],
     ) {}
   }
