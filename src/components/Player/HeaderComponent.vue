@@ -1,3 +1,7 @@
+<script lang="ts">
+import '@/assets/header.css'
+</script>
+
 <template>
     <header class="header_player">
         <div class="header_home">
