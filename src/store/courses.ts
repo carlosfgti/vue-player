@@ -4,7 +4,7 @@ import { defineStore } from 'pinia'
 
 const coursesGateway = new CoursesGatewayHttp('/courses')
 
-export const useCounterStore = defineStore('courses', {
+export const useCoursesStore = defineStore('courses', {
   state: () => ({
     courses: [] as Course[]
   }),
