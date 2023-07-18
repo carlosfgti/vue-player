@@ -10,8 +10,11 @@ import PlayerComponent from '@/components/Player/PlayerComponent.vue'
 import ContentComponent from '@/components/Player/ContentComponent.vue'
 import { useCoursesStore } from '@/store/courses'
 import { onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
 
 const courseStore = useCoursesStore()
+const { courseSelected } = storeToRefs(courseStore)
+console.log(courseSelected)
 
 onMounted(() => {
   courseStore.getAllCourses()
