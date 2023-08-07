@@ -1,9 +1,15 @@
 <script lang="ts">
 import '@/assets/player.css'
+import { useLessonsStore } from '@/store/lessons';
 
 export default {
   name: 'ContentComponent',
   setup() {
+    const lessonStore = useLessonsStore()
+
+    return {
+      lessonStore
+    }
   },
 }
 </script>
@@ -11,7 +17,7 @@ export default {
 <template>
   <aside class="menu">
     <div class="menu__title">
-      <h1>Aula - React</h1>
+      <h1>{{ lessonStore.title }}</h1>
       <div class="status__bar">
         <div class="loading-background status__completed"></div>
       </div>

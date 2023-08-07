@@ -15,6 +15,9 @@ export const useLessonsStore = defineStore('lessons', {
       else if (lesson.origin === 'youtube') return `https://www.youtube.com/embed/${lesson.video}`
 
       return `https://player.vimeo.com/video/${lesson.video}`
+    },
+    title(state): string {
+      return state.lessonPlayer === null ? '-' : state.lessonPlayer.name
     }
   },
   actions: {
