@@ -1,5 +1,11 @@
 <script lang="ts">
 import '@/assets/player.css'
+
+export default {
+  name: 'ContentComponent',
+  setup() {
+  },
+}
 </script>
 
 <template>
