@@ -26,7 +26,8 @@ export default class CoursesGatewayHttp implements CoursesGateway {
       data.img_social,
       data.status,
       data.free,
-      data.date
+      data.date,
+      data.modules
     )
   }
 
