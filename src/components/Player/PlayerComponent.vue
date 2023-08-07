@@ -1,6 +1,11 @@
 <script lang="ts">
 import '@/assets/player.css'
 
+export default {
+  name: 'PlayerComponent',
+  setup() {
+  },
+}
 </script>
 
 <template>
