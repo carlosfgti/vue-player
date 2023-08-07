@@ -8,7 +8,15 @@ export const useLessonsStore = defineStore('lessons', {
   state: () => ({
     lessonPlayer: null as null | Lesson
   }),
-  getters: {},
+  getters: {
+    video(state): string {
+      const lesson = state.lessonPlayer
+      if (lesson === null) return 'https://player.vimeo.com/video/117908430'
+      else if (lesson.origin === 'youtube') return `https://www.youtube.com/embed/${lesson.video}`
+
+      return `https://player.vimeo.com/video/${lesson.video}`
+    }
+  },
   actions: {
     async findByURL(url: string) {
       this.lessonPlayer = await lessonsGateway.getByURL(url)
