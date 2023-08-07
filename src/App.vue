@@ -8,16 +8,16 @@ import '@/assets/reset.css'
 import HeaderComponent from '@/components/Player/HeaderComponent.vue'
 import PlayerComponent from '@/components/Player/PlayerComponent.vue'
 import ContentComponent from '@/components/Player/ContentComponent.vue'
-import { useCoursesStore } from '@/store/courses'
+import { useLessonsStore } from '@/store/lessons'
 import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 
-const courseStore = useCoursesStore()
-const { courseSelected } = storeToRefs(courseStore)
-console.log(courseSelected)
+const lessonStore = useLessonsStore()
+const { lessonPlayer } = storeToRefs(lessonStore)
+console.log(lessonPlayer)
 
 onMounted(() => {
-  courseStore.getAllCourses()
+  lessonStore.findByURL('o-que-e-serverless')
 })
 </script>
 
