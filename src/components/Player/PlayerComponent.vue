@@ -16,18 +16,7 @@ export default {
 
 <template>
   <iframe
-    v-if="lessonStore.lessonPlayer === null"
-    src="117908430"
-    title="EspecializaTi"
-    frameborder="0"
-    allow="autoplay; fullscreen; picture-in-picture"
-    allowfullscreen
-    class="player"
-  ></iframe>
-  <iframe
-    v-else
-    :src="'https://player.vimeo.com/video/' + lessonStore.lessonPlayer.video"
-    :title="lessonStore.lessonPlayer.url"
+    :src="lessonStore.video"
     frameborder="0"
     allow="autoplay; fullscreen; picture-in-picture"
     allowfullscreen
