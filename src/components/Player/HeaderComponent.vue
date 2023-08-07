@@ -1,5 +1,11 @@
 <script lang="ts">
 import '@/assets/header.css'
+
+export default {
+  name: 'HeaderComponent',
+  setup() {
+  },
+}
 </script>
 
 <template>
