@@ -8,16 +8,15 @@ import '@/assets/reset.css'
 import HeaderComponent from '@/components/Player/HeaderComponent.vue'
 import PlayerComponent from '@/components/Player/PlayerComponent.vue'
 import ContentComponent from '@/components/Player/ContentComponent.vue'
-import { useLessonsStore } from '@/store/lessons'
+// import { useLessonsStore } from '@/store/lessons'
 import { onMounted } from 'vue'
-import { storeToRefs } from 'pinia'
+import { useCoursesStore } from './store/courses'
 
-const lessonStore = useLessonsStore()
-const { lessonPlayer } = storeToRefs(lessonStore)
-console.log(lessonPlayer)
+// const lessonStore = useLessonsStore()
+const courseStore = useCoursesStore()
 
 onMounted(() => {
-  lessonStore.findByURL('o-que-e-serverless')
+  courseStore.getCourse('aws-ec2-escalabilidade-e-alta-disponibilidade')
 })
 </script>
 
