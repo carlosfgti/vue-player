@@ -23,6 +23,9 @@ export const useLessonsStore = defineStore('lessons', {
   actions: {
     async findByURL(url: string) {
       this.lessonPlayer = await lessonsGateway.getByURL(url)
+    },
+    addLessonPlayer(lesson: Lesson) {
+      this.lessonPlayer = lesson
     }
   }
 })
