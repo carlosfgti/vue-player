@@ -33,7 +33,7 @@ export default {
         </div>
         <ul class="category-card__task-list" v-if="module.lessons !== null">
           <li v-for="lesson in module.lessons" :key="lesson.url" class="task-list__card">
-            <input type="checkbox" name="completed" id="" />
+            <input type="checkbox" name="completed" id="" :checked="lesson.views > 0" />
             <p>{{ lesson.name }}</p>
           </li>
         </ul>
