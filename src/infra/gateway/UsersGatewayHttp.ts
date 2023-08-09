@@ -11,12 +11,23 @@ export default class UsersGatewayHttp implements UsersGateway {
   }
 
   async getMe(): Promise<User> {
-    const response = await this.httpClient.get('/me')
-    const data = response.data
+    const token = localStorage.getItem('_oauth')
+    const response = await this.httpClient
+      .get('/me', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .catch((error) => {
+        if (error.status === 401) {
+          localStorage.removeItem('_oauth')
+        }
+      })
+    const { name, email } = response.data
 
     return new User(
-      data.name,
-      data.email
+      name,
+      email
       // data.image,
     )
   }
