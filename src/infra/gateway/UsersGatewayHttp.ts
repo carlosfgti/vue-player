@@ -21,9 +21,11 @@ export default class UsersGatewayHttp implements UsersGateway {
     )
   }
 
-  async login(email: string, password: string): Promise<void> {
-    const response = await this.httpClient.post('/login', { email, password })
-    console.log(response.data)
+  async login(email: string, password: string): Promise<any> {
+    const device_name = 'vue_app'
+    return await this.httpClient
+      .post('/login', { email, password, device_name })
+      .then((response) => localStorage.setItem('_oauth', response.data.token))
   }
 
   async logout(): Promise<void> {
