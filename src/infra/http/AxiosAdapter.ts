@@ -12,12 +12,10 @@ export default class AxiosAdapter implements HttpClient {
   }
 
   async post(url: string, body: any): Promise<any> {
-    const response = await this.axiosInstance.post(url, body)
-    return response.data
+    return await this.axiosInstance.post(url, body)
   }
 
   async get(url: string): Promise<any> {
-    const response = await this.axiosInstance.get(url)
-    return response.data
+    return await this.axiosInstance.get(url)
   }
 }
