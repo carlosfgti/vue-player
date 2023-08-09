@@ -13,7 +13,7 @@ export const useUsersStore = defineStore('users', {
       this.user = await usersGateway.getMe()
     },
     async login(email: string, password: string) {
-      await usersGateway.login(email, password)
+      return await usersGateway.login(email, password)
     },
     async logout() {
       await usersGateway.logout()
