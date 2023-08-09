@@ -15,7 +15,7 @@ export default class AxiosAdapter implements HttpClient {
     return await this.axiosInstance.post(url, body)
   }
 
-  async get(url: string): Promise<any> {
-    return await this.axiosInstance.get(url)
+  async get(url: string, configs?: object): Promise<any> {
+    return await this.axiosInstance.get(url, configs)
   }
 }
