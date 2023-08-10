@@ -12,7 +12,12 @@ export default class CoursesGatewayHttp implements CoursesGateway {
   }
 
   async get(id: string): Promise<Course> {
-    const response = await this.httpClient.get(`${this.baseUrl}/${id}`)
+    const token = localStorage.getItem('_oauth')
+    const response = await this.httpClient.get(`${this.baseUrl}/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
     const data = response.data
     return new Course(
       data.name,
