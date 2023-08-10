@@ -9,23 +9,22 @@ import HeaderComponent from '@/components/Player/HeaderComponent.vue'
 import PlayerComponent from '@/components/Player/PlayerComponent.vue'
 import ContentComponent from '@/components/Player/ContentComponent.vue'
 
-// import { onMounted } from 'vue'
-// import { useCoursesStore } from '@/store/courses'
-
-// // const lessonStore = useLessonsStore()
-// const courseStore = useCoursesStore()
-
-// onMounted(() => {
-//   courseStore.getCourse('aws-ec2-escalabilidade-e-alta-disponibilidade')
-// })
+import { onMounted } from 'vue'
+import { useCoursesStore } from '@/store/courses'
 
 export default {
   name: 'PlayerPage',
+  setup() {
+    const courseStore = useCoursesStore()
+    onMounted(() => {
+      courseStore.getCourse('aws-ec2-escalabilidade-e-alta-disponibilidade')
+    })
+  },
   components: {
     HeaderComponent,
     PlayerComponent,
     ContentComponent
-  }
+  },
 }
 </script>
 
