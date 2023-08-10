@@ -16,6 +16,15 @@ export const useCoursesStore = defineStore('courses', {
     },
     async getCourse(id: string) {
       this.courseSelected = await coursesGateway.get(id)
+    },
+    markLessonViewed(lessonUrl: string): void {
+      this.courseSelected?.modules?.map((module, indexModule) => {
+        module.lessons?.map((lesson, indexLesson) => {
+          if (lesson.url === lessonUrl) {
+            this.courseSelected.modules[indexModule].lessons[indexLesson].views = 1
+          }
+        })
+      })
     }
   }
 })

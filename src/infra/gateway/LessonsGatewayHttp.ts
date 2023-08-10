@@ -28,4 +28,13 @@ export default class LessonsGatewayHttp implements LessonsGateway {
       data.module
     )
   }
+
+  async markLessonAsViewed(id: string): Promise<any> {
+    const token = localStorage.getItem('_oauth')
+    return await this.httpClient.get(`${this.baseUrl}/${id}/viewed`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+  }
 }

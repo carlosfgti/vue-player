@@ -1,6 +1,7 @@
 import Lesson from '@/entities/Lesson'
 import LessonsGatewayHttp from '@/infra/gateway/LessonsGatewayHttp'
 import { defineStore } from 'pinia'
+import { useCoursesStore } from './courses'
 
 const lessonsGateway = new LessonsGatewayHttp('/lessons')
 
@@ -24,8 +25,16 @@ export const useLessonsStore = defineStore('lessons', {
     async findByURL(url: string) {
       this.lessonPlayer = await lessonsGateway.getByURL(url)
     },
-    addLessonPlayer(lesson: Lesson) {
+    async addLessonPlayer(lesson: Lesson) {
       this.lessonPlayer = lesson
+
+      await this.markLessonAsViewed(lesson)
+    },
+    async markLessonAsViewed(lesson: Lesson) {
+      await lessonsGateway.markLessonAsViewed(lesson.url).then(() => {
+        const courseStore = useCoursesStore()
+        courseStore.markLessonViewed(lesson.url)
+      })
     }
   }
 })

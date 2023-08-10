@@ -17,7 +17,7 @@ export default {
   setup() {
     const courseStore = useCoursesStore()
     onMounted(() => {
-      courseStore.getCourse('aws-ec2-escalabilidade-e-alta-disponibilidade')
+      courseStore.getCourse('laravel-food')
     })
   },
   components: {
