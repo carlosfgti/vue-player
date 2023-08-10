@@ -20,7 +20,12 @@ import ContentComponent from '@/components/Player/ContentComponent.vue'
 // })
 
 export default {
-  name: 'PlayerPage'
+  name: 'PlayerPage',
+  components: {
+    HeaderComponent,
+    PlayerComponent,
+    ContentComponent
+  }
 }
 </script>
 
