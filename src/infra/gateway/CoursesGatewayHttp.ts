@@ -18,7 +18,7 @@ export default class CoursesGatewayHttp implements CoursesGateway {
         Authorization: `Bearer ${token}`
       }
     })
-    const data = response.data
+    const data = response.data.data
     return new Course(
       data.name,
       data.url,
