@@ -21,6 +21,7 @@ export const useCoursesStore = defineStore('courses', {
       this.courseSelected?.modules?.map((module, indexModule) => {
         module.lessons?.map((lesson, indexLesson) => {
           if (lesson.url === lessonUrl) {
+            // @ts-ignore
             this.courseSelected.modules[indexModule].lessons[indexLesson].views = 1
           }
         })
