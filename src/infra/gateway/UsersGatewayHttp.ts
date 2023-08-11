@@ -23,9 +23,10 @@ export default class UsersGatewayHttp implements UsersGateway {
           localStorage.removeItem('_oauth')
         }
       })
-    const { name, email } = response.data
+    const { url, name, email } = response.data
 
     return new User(
+      url,
       name,
       email
       // data.image,

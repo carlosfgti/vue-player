@@ -1,3 +1,8 @@
 export default class User {
-  constructor(readonly name: string, readonly email: string, readonly image?: string) {}
+  constructor(
+    readonly url: string,
+    readonly name: string,
+    readonly email: string,
+    readonly image?: string
+  ) {}
 }
