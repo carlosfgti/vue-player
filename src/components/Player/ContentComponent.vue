@@ -22,7 +22,7 @@ export default {
     <div class="menu__title">
       <h1>{{ lessonStore.title }}</h1>
       <div class="status__bar">
-        <div class="loading-background status__completed"></div>
+        <div class="loading-background status__completed" :style="{width: `${courseStore.totalCourseComplete}%`}"></div>
       </div>
     </div>
     <div v-if="courseStore.courseSelected === null">Carregando...</div>

@@ -9,7 +9,27 @@ export const useCoursesStore = defineStore('courses', {
     courses: [] as Course[],
     courseSelected: null as null | Course
   }),
-  getters: {},
+  getters: {
+    totalCourseComplete(state): number {
+      if (this.courseSelected === null) return 0
+
+      let totalLessonsCourse = 0
+      state.courseSelected?.modules?.map(
+        (module) => (totalLessonsCourse += module.lessons?.length ?? 0)
+      )
+
+      let totalLessonsWithViews = 0
+      state.courseSelected?.modules?.map((module) => {
+        module.lessons?.map((lesson) => {
+          if (lesson.views > 0) {
+            totalLessonsWithViews++
+          }
+        })
+      })
+
+      return (totalLessonsWithViews / totalLessonsCourse) * 100
+    }
+  },
   actions: {
     async getAllCourses() {
       this.courses = await coursesGateway.getAll()
