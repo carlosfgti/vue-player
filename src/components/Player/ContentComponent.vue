@@ -34,7 +34,7 @@ export default {
         <ul class="category-card__task-list" v-if="module.lessons !== null">
           <li v-for="lesson in module.lessons" :key="lesson.url" class="task-list__card">
             <input type="checkbox" name="completed" id="" :checked="lesson.views > 0" />
-            <p @click.prevent="lessonStore.addLessonPlayer(lesson)">{{ lesson.name }}</p>
+            <p @click.prevent="lessonStore.addLessonPlayer(lesson)" style="cursor: pointer;">{{ lesson.name }}</p>
           </li>
         </ul>
       </li>
