@@ -1,7 +1,20 @@
+
+.container-player {
+  display: flex;
+  flex-direction: column;
+}
+
 .player {
   width: 100%;
   min-height: calc(0.5625 * 100vw);
   background-color: black;
+}
+
+.content-lesson {
+  width: 100%;
+  background: #181818;
+  padding: 5px 10px;
+  color: #ffff;
 }
 
 /* PC */

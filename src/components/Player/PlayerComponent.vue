@@ -22,4 +22,9 @@ export default {
     allowfullscreen
     class="player"
   ></iframe>
+  <div></div>
+  <div class="content-lesson">
+    <div v-if="lessonStore.lessonPlayer?.description" v-html="lessonStore.lessonPlayer?.description"></div>
+    <div v-else>---</div>
+  </div>
 </template>
