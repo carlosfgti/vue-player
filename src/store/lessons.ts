@@ -35,6 +35,28 @@ export const useLessonsStore = defineStore('lessons', {
         const courseStore = useCoursesStore()
         courseStore.markLessonViewed(lesson.url)
       })
+    },
+    nextLesson(currentLesson: Lesson) {
+      const courseStore = useCoursesStore()
+      courseStore.courseSelected?.modules?.map((module) => {
+        module.lessons?.map((lesson, index) => {
+          if (currentLesson === lesson) {
+            // @ts-ignore
+            this.lessonPlayer = module.lessons[index + 1] ?? null
+          }
+        })
+      })
+    },
+    previousLesson(currentLesson: Lesson) {
+      const courseStore = useCoursesStore()
+      courseStore.courseSelected?.modules?.map((module) => {
+        module.lessons?.map((lesson, index) => {
+          if (currentLesson === lesson) {
+            // @ts-ignore
+            this.lessonPlayer = module.lessons[index - 1] ?? null
+          }
+        })
+      })
     }
   }
 })
