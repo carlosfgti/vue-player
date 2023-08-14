@@ -31,20 +31,13 @@ router.beforeEach(async (to, _, next) => {
       return router.push({ name: 'login' })
     } else if (token !== null && user !== null && to.name === 'login') {
       return router.push({ name: 'player' })
-    }
-
-    await userStore
-      .getMe()
-      .catch(() => {
-        if (to.name != 'login') {
-          return router.push({ name: 'login' })
-        }
-      })
-      .then(() => {
+    } else if (token !== null && user === null && to.name !== 'login') {
+      await userStore.getMe().then(() => {
         if (to.name != 'player') {
           return router.push({ name: 'player' })
         }
       })
+    }
   }
 
   return next()
