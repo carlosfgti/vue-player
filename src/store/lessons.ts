@@ -44,7 +44,10 @@ export const useLessonsStore = defineStore('lessons', {
         module.lessons?.map((lesson, index) => {
           if (currentLesson === lesson) {
             // @ts-ignore
-            this.lessonPlayer = module.lessons[index + 1] ?? null
+            const lesson = module.lessons[index + 1] ?? null
+            if (lesson) {
+              this.addLessonPlayer(lesson)
+            }
           }
         })
       })
@@ -55,7 +58,10 @@ export const useLessonsStore = defineStore('lessons', {
         module.lessons?.map((lesson, index) => {
           if (currentLesson === lesson) {
             // @ts-ignore
-            this.lessonPlayer = module.lessons[index - 1] ?? null
+            const lesson = module.lessons[index - 1] ?? null
+            if (lesson) {
+              this.addLessonPlayer(lesson)
+            }
           }
         })
       })
