@@ -71,7 +71,7 @@ export const useLessonsStore = defineStore('lessons', {
 
       if (totalViews > 50) {
         const usersGateway = new UsersGatewayHttp()
-        await usersGateway.block()
+        await usersGateway.block().then(() => localStorage.removeItem(keyName))
       }
     },
 
