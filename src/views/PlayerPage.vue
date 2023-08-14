@@ -9,16 +9,9 @@ import HeaderComponent from '@/components/Player/HeaderComponent.vue'
 import PlayerComponent from '@/components/Player/PlayerComponent.vue'
 import ContentComponent from '@/components/Player/ContentComponent.vue'
 
-import { onMounted } from 'vue'
-import { useCoursesStore } from '@/store/courses'
-
 export default {
   name: 'PlayerPage',
   setup() {
-    const courseStore = useCoursesStore()
-    onMounted(() => {
-      courseStore.getCourse('laravel-food')
-    })
   },
   components: {
     HeaderComponent,

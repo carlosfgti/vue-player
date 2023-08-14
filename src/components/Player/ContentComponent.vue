@@ -1,13 +1,21 @@
 <script lang="ts">
 import '@/assets/player.css'
+import router from '@/router';
 import { useCoursesStore } from '@/store/courses';
 import { useLessonsStore } from '@/store/lessons';
+import { onMounted } from 'vue';
 
 export default {
   name: 'ContentComponent',
   setup() {
     const lessonStore = useLessonsStore()
     const courseStore = useCoursesStore()
+
+    onMounted(() => {
+      if (courseStore.courseSelected === null) {
+        return router.push({name: 'my.courses'})
+      }
+    })
 
     return {
       lessonStore,

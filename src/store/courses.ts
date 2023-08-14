@@ -1,5 +1,6 @@
 import Course from '@/entities/Course'
 import CoursesGatewayHttp from '@/infra/gateway/CoursesGatewayHttp'
+import type { MyCourseType } from '@/types'
 import { defineStore } from 'pinia'
 
 const coursesGateway = new CoursesGatewayHttp('/courses')
@@ -7,27 +8,27 @@ const coursesGateway = new CoursesGatewayHttp('/courses')
 export const useCoursesStore = defineStore('courses', {
   state: () => ({
     courses: [] as Course[],
-    courseSelected: null as null | Course
+    myCourses: null as MyCourseType | null,
+    courseSelected: null as Course | null
   }),
   getters: {
     totalCourseComplete(state): number {
-      if (this.courseSelected === null) return 0
+      if (!state.courseSelected) return 0
 
       let totalLessonsCourse = 0
-      state.courseSelected?.modules?.map(
-        (module) => (totalLessonsCourse += module.lessons?.length ?? 0)
-      )
-
       let totalLessonsWithViews = 0
-      state.courseSelected?.modules?.map((module) => {
-        module.lessons?.map((lesson) => {
+
+      state.courseSelected.modules?.forEach((module) => {
+        totalLessonsCourse += module.lessons?.length || 0
+
+        module.lessons?.forEach((lesson) => {
           if (lesson.views > 0) {
             totalLessonsWithViews++
           }
         })
       })
 
-      return (totalLessonsWithViews / totalLessonsCourse) * 100
+      return (totalLessonsWithViews / totalLessonsCourse) * 100 || 0
     }
   },
   actions: {
@@ -38,14 +39,19 @@ export const useCoursesStore = defineStore('courses', {
       this.courseSelected = await coursesGateway.get(id)
     },
     markLessonViewed(lessonUrl: string): void {
-      this.courseSelected?.modules?.map((module, indexModule) => {
-        module.lessons?.map((lesson, indexLesson) => {
+      if (!this.courseSelected) return
+
+      this.courseSelected.modules?.forEach((module, indexModule) => {
+        module.lessons?.forEach((lesson, indexLesson) => {
           if (lesson.url === lessonUrl) {
             // @ts-ignore
             this.courseSelected.modules[indexModule].lessons[indexLesson].views = 1
           }
         })
       })
+    },
+    async fetchMyCourses() {
+      this.myCourses = await coursesGateway.getMyCourses()
     }
   }
 })

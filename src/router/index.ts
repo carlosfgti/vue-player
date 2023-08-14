@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Auth from '@/views/AuthPage.vue'
 import Player from '@/views/PlayerPage.vue'
 import { useUsersStore } from '@/store/users'
+import MyCourses from '@/views/MyCourses.vue'
 
 const routes = [
   {
@@ -11,6 +12,11 @@ const routes = [
   },
   {
     path: '/',
+    name: 'my.courses',
+    component: MyCourses
+  },
+  {
+    path: '/player',
     name: 'player',
     component: Player
   }
@@ -30,11 +36,11 @@ router.beforeEach(async (to, _, next) => {
     if (token === null && to.name != 'login') {
       return router.push({ name: 'login' })
     } else if (token !== null && user !== null && to.name === 'login') {
-      return router.push({ name: 'player' })
+      return router.push({ name: 'my.courses' })
     } else if (token !== null && user === null && to.name !== 'login') {
       await userStore.getMe().then(() => {
-        if (to.name != 'player') {
-          return router.push({ name: 'player' })
+        if (to.name != 'my.courses') {
+          return router.push({ name: 'my.courses' })
         }
       })
     }

@@ -3,6 +3,8 @@ import type CoursesGateway from './CoursesGateway'
 import type HttpClient from '../http/HttpClient'
 import AxiosAdapter from '../http/AxiosAdapter'
 import Module from '@/entities/Module'
+import type { MyCourseType } from '@/types'
+import Lesson from '@/entities/Lesson'
 
 export default class CoursesGatewayHttp implements CoursesGateway {
   private httpClient: HttpClient
@@ -82,5 +84,96 @@ export default class CoursesGatewayHttp implements CoursesGateway {
     })
 
     return courses
+  }
+
+  async getMyCourses(): Promise<MyCourseType> {
+    const token = localStorage.getItem('_oauth')
+    const response = await this.httpClient.get('/my-courses', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    const { data, meta } = response.data
+
+    // Map the coursesData array to an array of Course objects
+    const courses: Course[] = data.map((courseData: any) => {
+      const {
+        name,
+        url,
+        description,
+        certificate_time,
+        color,
+        origin,
+        video,
+        image,
+        img_social,
+        status,
+        free,
+        date,
+        modules
+      } = courseData
+
+      // Map the modules array to an array of Module objects
+      const courseModules: Module[] = modules.map((moduleData: any) => {
+        const lessons = moduleData.lessons.map((lessonData: any) => {
+          const {
+            name,
+            url,
+            video,
+            published,
+            description,
+            date,
+            duration,
+            origin,
+            free,
+            created_at,
+            views
+          } = lessonData
+          return new Lesson(
+            name,
+            url,
+            video,
+            published,
+            description,
+            date,
+            duration,
+            origin,
+            free,
+            created_at,
+            views
+          )
+        })
+        const { name, description } = moduleData
+        return new Module(name, description, lessons)
+      })
+
+      return new Course(
+        name,
+        url,
+        description,
+        certificate_time,
+        color,
+        origin,
+        video,
+        image,
+        img_social,
+        status,
+        free,
+        date,
+        courseModules
+      )
+    })
+
+    return {
+      data: courses,
+      meta: {
+        total: meta.total,
+        currentPage: meta.current_page,
+        nextPage: meta.to,
+        previousPage: meta.to,
+        hasNextPage: true,
+        hasPreviousPage: false
+      }
+    }
   }
 }
