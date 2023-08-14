@@ -11,7 +11,7 @@ export default {
     const loading = ref(true)
 
     onMounted(() => {
-      courseStore.fetchMyCourses().then(() => loading.value = false)
+      courseStore.fetchMyCourses().finally(() => loading.value = false)
     })
 
     const setCourseSelected = (course: Course) => {
