@@ -11,15 +11,18 @@ export default {
     const lessonStore = useLessonsStore()
     const courseStore = useCoursesStore()
 
+    const toMyCourses = () => router.push({name: 'my.courses'})
+
     onMounted(() => {
       if (courseStore.courseSelected === null) {
-        return router.push({name: 'my.courses'})
+        return toMyCourses()
       }
     })
 
     return {
       lessonStore,
       courseStore,
+      toMyCourses
     }
   },
 }
@@ -46,6 +49,14 @@ export default {
           </li>
         </ul>
       </li>
+      <div class="footer-sidebar">
+      <h2 class="category-card__title">Outros links</h2>
+      <ul>
+        <li class="task-list__card">
+          <p @click="toMyCourses" style="cursor: pointer;">Meus Cursos</p>
+        </li>
+      </ul>
+    </div>
     </ul>
   </aside>
 </template>
