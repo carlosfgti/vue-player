@@ -23,12 +23,13 @@ export default class UsersGatewayHttp implements UsersGateway {
           localStorage.removeItem('_oauth')
         }
       })
-    const { url, name, email } = response.data
+    const { url, name, blocked, email } = response.data.data
 
     return new User(
       url,
       name,
-      email
+      email,
+      !!blocked
       // data.image,
     )
   }
