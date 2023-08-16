@@ -39,6 +39,9 @@ export default {
         v-for="(course, index) in courseStore.myCourses?.data"
         :key="index"
         @click="setCourseSelected(course)">
+        <div class="image-course" :style="{backgroundColor: course.color}">
+          <img :src="course.image" :alt="course.name" style="max-width: 200px;">
+        </div>
         <h2>{{ course.name }}</h2>
         <h2>Total Completo: {{  courseStore.calcTotalCourseCompleted(course)  }}</h2>
       </div>
