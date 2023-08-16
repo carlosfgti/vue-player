@@ -15,20 +15,7 @@ export const useCoursesStore = defineStore('courses', {
     totalCourseComplete(state): number {
       if (!state.courseSelected) return 0
 
-      let totalLessonsCourse = 0
-      let totalLessonsWithViews = 0
-
-      state.courseSelected.modules?.forEach((module) => {
-        totalLessonsCourse += module.lessons?.length || 0
-
-        module.lessons?.forEach((lesson) => {
-          if (lesson.views > 0) {
-            totalLessonsWithViews++
-          }
-        })
-      })
-
-      return (totalLessonsWithViews / totalLessonsCourse) * 100 || 0
+      return this.calcTotalCourseCompleted(state.courseSelected)
     }
   },
   actions: {
@@ -52,6 +39,22 @@ export const useCoursesStore = defineStore('courses', {
     },
     async fetchMyCourses() {
       this.myCourses = await coursesGateway.getMyCourses()
+    },
+    calcTotalCourseCompleted(course: Course): number {
+      let totalLessonsCourse = 0
+      let totalLessonsWithViews = 0
+
+      course.modules?.forEach((module) => {
+        totalLessonsCourse += module.lessons?.length || 0
+
+        module.lessons?.forEach((lesson) => {
+          if (lesson.views > 0) {
+            totalLessonsWithViews++
+          }
+        })
+      })
+
+      return (totalLessonsWithViews / totalLessonsCourse) * 100 || 0
     }
   }
 })
