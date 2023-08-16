@@ -42,7 +42,18 @@ export default class UsersGatewayHttp implements UsersGateway {
   }
 
   async logout(): Promise<void> {
-    await this.httpClient.post('/logout', {})
+    const token = localStorage.getItem('_oauth')
+    await this.httpClient
+      .post(
+        '/logout',
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      )
+      .then(() => localStorage.removeItem('_oauth'))
   }
 
   async block(): Promise<void> {

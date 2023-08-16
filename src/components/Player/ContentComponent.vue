@@ -3,6 +3,7 @@ import '@/assets/player.css'
 import router from '@/router';
 import { useCoursesStore } from '@/store/courses';
 import { useLessonsStore } from '@/store/lessons';
+import { useUsersStore } from '@/store/users';
 import { onMounted } from 'vue';
 
 export default {
@@ -10,8 +11,12 @@ export default {
   setup() {
     const lessonStore = useLessonsStore()
     const courseStore = useCoursesStore()
+    const useStore = useUsersStore()
 
     const toMyCourses = () => router.push({name: 'my.courses'})
+    const logout = () => {
+      useStore.logout().then(() => router.push({name: 'login'}))
+    }
 
     onMounted(() => {
       if (courseStore.courseSelected === null) {
@@ -22,7 +27,8 @@ export default {
     return {
       lessonStore,
       courseStore,
-      toMyCourses
+      toMyCourses,
+      logout
     }
   },
 }
@@ -54,6 +60,9 @@ export default {
       <ul>
         <li class="task-list__card">
           <p @click="toMyCourses" style="cursor: pointer;">Meus Cursos</p>
+        </li>
+        <li class="task-list__card">
+          <p @click="logout" style="cursor: pointer;">Sair</p>
         </li>
       </ul>
     </div>
