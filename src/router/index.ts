@@ -38,11 +38,18 @@ router.beforeEach(async (to, _, next) => {
     } else if (token !== null && user !== null && to.name === 'login') {
       return router.push({ name: 'my.courses' })
     } else if (token !== null && user === null && to.name !== 'login') {
-      await userStore.getMe().then(() => {
-        if (to.name != 'my.courses') {
-          return router.push({ name: 'my.courses' })
-        }
-      })
+      await userStore
+        .getMe()
+        .then(() => {
+          if (to.name != 'my.courses') {
+            return router.push({ name: 'my.courses' })
+          }
+        })
+        .catch(() => {
+          if (to.name !== 'login') {
+            return router.push({ name: 'login' })
+          }
+        })
     }
   }
 
