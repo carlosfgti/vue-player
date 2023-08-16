@@ -40,6 +40,7 @@ export default {
         :key="index"
         @click="setCourseSelected(course)">
         <h2>{{ course.name }}</h2>
+        <h2>Total Completo: {{  courseStore.calcTotalCourseCompleted(course)  }}</h2>
       </div>
     </div>
   </div>
