@@ -36,6 +36,9 @@ export default {
 
 <template>
   <aside class="menu">
+    <div class="image-course" :style="{backgroundColor: courseStore.courseSelected?.color}">
+      <img :src="courseStore.courseSelected?.image" :alt="courseStore.courseSelected?.name">
+    </div>
     <div class="menu__title">
       <h1>{{ lessonStore.title }}</h1>
       <div class="status__bar">
@@ -69,3 +72,15 @@ export default {
     </ul>
   </aside>
 </template>
+
+<style scoped>
+.image-course {
+  max-width: 50px;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 0 auto;
+}
+.image-course img {
+  width: 100%;
+}
+</style>
