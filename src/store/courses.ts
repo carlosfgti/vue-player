@@ -59,6 +59,10 @@ export const useCoursesStore = defineStore('courses', {
       })
 
       return (totalLessonsWithViews / totalLessonsCourse) * 100 || 0
+    },
+
+    async generateCertificate(course: Course) {
+      return await coursesGateway.generateCertificate(course)
     }
   }
 })

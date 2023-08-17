@@ -179,4 +179,17 @@ export default class CoursesGatewayHttp implements CoursesGateway {
       }
     }
   }
+
+  async generateCertificate(course: Course): Promise<any> {
+    const token = localStorage.getItem('_oauth')
+    return await this.httpClient.post(
+      '/generate-certificate',
+      { course: course.url },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    )
+  }
 }

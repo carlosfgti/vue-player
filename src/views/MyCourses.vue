@@ -28,13 +28,19 @@ export default {
 
     const nextPage = () => fetchMyCourses(courseStore.myCourses?.meta.nextPage ?? 1, filter.value)
     const previousPage = () => fetchMyCourses(courseStore.myCourses?.meta.previousPage ?? 1, filter.value)
+    const getCertificate = (course: Course) => {
+      courseStore.generateCertificate(course).then(response => {
+        console.log(response.data.data.identify)
+      })
+    }
 
     return {
       courseStore,
       loading,
       setCourseSelected,
       nextPage,
-      previousPage
+      previousPage,
+      getCertificate,
     }
   }
 }
@@ -48,16 +54,18 @@ export default {
       <div
         class="course"
         v-for="(course, index) in courseStore.myCourses?.data"
-        :key="index"
-        @click="setCourseSelected(course)">
+        :key="index">
         <div class="image-course" :style="{backgroundColor: course.color}">
-          <img :src="course.image" :alt="course.name" style="max-width: 200px;">
+          <img :src="course.image" :alt="course.name" style="max-width: 200px;" @click="setCourseSelected(course)">
         </div>
         <div class="content-course">
           <div class="progress-bar">
             <div class="progress" :style="{width: `${courseStore.calcTotalCourseCompleted(course)}%`}"></div>
           </div>
-          <h2>{{ course.name }}</h2>
+          <h2 @click="setCourseSelected(course)">{{ course.name }}</h2>
+          <div
+            v-if="courseStore.calcTotalCourseCompleted(course) >= 100"
+            @click.prevent="getCertificate(course)">Certificado</div>
         </div>
       </div>
     </div>
