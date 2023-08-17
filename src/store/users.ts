@@ -17,6 +17,10 @@ export const useUsersStore = defineStore('users', {
     },
     async logout() {
       await usersGateway.logout()
+    },
+    async block(): Promise<any> {
+      this.user?.block()
+      return await usersGateway.block()
     }
   }
 })

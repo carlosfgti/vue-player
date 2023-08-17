@@ -2,7 +2,7 @@ import Lesson from '@/entities/Lesson'
 import LessonsGatewayHttp from '@/infra/gateway/LessonsGatewayHttp'
 import { defineStore } from 'pinia'
 import { useCoursesStore } from './courses'
-import UsersGatewayHttp from '@/infra/gateway/UsersGatewayHttp'
+import { useUsersStore } from './users'
 
 const lessonsGateway = new LessonsGatewayHttp('/lessons')
 
@@ -76,8 +76,8 @@ export const useLessonsStore = defineStore('lessons', {
       localStorage.setItem(keyName, totalViews.toString())
 
       if (totalViews > 50) {
-        const usersGateway = new UsersGatewayHttp()
-        await usersGateway.block().then(() => localStorage.removeItem(keyName))
+        const storeUser = useUsersStore()
+        await storeUser.block().then(() => localStorage.removeItem(keyName))
       }
     },
 
