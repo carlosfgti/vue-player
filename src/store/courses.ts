@@ -37,8 +37,12 @@ export const useCoursesStore = defineStore('courses', {
         })
       })
     },
-    async fetchMyCourses() {
-      this.myCourses = await coursesGateway.getMyCourses()
+    async fetchMyCourses(page: number, filter?: string) {
+      const params = {
+        page,
+        filter
+      }
+      this.myCourses = await coursesGateway.getMyCourses(params)
     },
     calcTotalCourseCompleted(course: Course): number {
       let totalLessonsCourse = 0

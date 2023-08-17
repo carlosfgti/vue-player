@@ -8,10 +8,16 @@ export default {
   name: 'MyCourses',
   setup() {
     const courseStore = useCoursesStore()
-    const loading = ref(true)
+    const loading = ref(false)
+    const filter = ref('')
+
+    const fetchMyCourses = (page: number, filter: string) => {
+      loading.value = true
+      courseStore.fetchMyCourses(page, filter).finally(() => loading.value = false)
+    }
 
     onMounted(() => {
-      courseStore.fetchMyCourses().finally(() => loading.value = false)
+      fetchMyCourses(1, filter.value)
     })
 
     const setCourseSelected = (course: Course) => {
@@ -20,10 +26,15 @@ export default {
       router.push({ name: 'player' })
     }
 
+    const nextPage = () => fetchMyCourses(courseStore.myCourses?.meta.nextPage ?? 1, filter.value)
+    const previousPage = () => fetchMyCourses(courseStore.myCourses?.meta.previousPage ?? 1, filter.value)
+
     return {
       courseStore,
       loading,
-      setCourseSelected
+      setCourseSelected,
+      nextPage,
+      previousPage
     }
   }
 }
@@ -49,6 +60,10 @@ export default {
           <h2>{{ course.name }}</h2>
         </div>
       </div>
+    </div>
+    <div class="pagination" v-if="courseStore.myCourses?.meta">
+      <a href="#" @click.prevent="previousPage" :class="['prev', { 'disable-pagination': !courseStore.myCourses?.meta.hasPreviousPage }]">Voltar</a>
+      <a href="#" @click.prevent="nextPage" :class="['next', { 'disable-pagination': !courseStore.myCourses?.meta.hasNextPage }]">Próxima</a>
     </div>
   </div>
 </template>
@@ -102,6 +117,47 @@ h2 {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   word-wrap: break-word;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.page,
+.prev,
+.next {
+  padding: 6px 12px;
+  margin: 0 3px;
+  border: 1px solid #ccc;
+  text-decoration: none;
+  color: #333;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.page:hover,
+.prev:hover,
+.next:hover {
+  background-color: #f0f0f0;
+}
+
+.prev,
+.next {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.prev:hover,
+.next:hover {
+  background-color: #ddd;
+}
+.disable-pagination {
+  background-color: #ccc;
+  color: #888;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 </style>
