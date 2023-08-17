@@ -5,9 +5,11 @@ export type MyCourseType = {
   meta: {
     total: number
     currentPage: number
-    nextPage: number
-    previousPage: number
+    nextPage: number | null
+    previousPage: number | null
     hasNextPage: boolean
     hasPreviousPage: boolean
+    lastPage: number
+    totalPerPage: number
   }
 }
