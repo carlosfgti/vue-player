@@ -30,7 +30,14 @@ export default {
     const previousPage = () => fetchMyCourses(courseStore.myCourses?.meta.previousPage ?? 1, filter.value)
     const getCertificate = (course: Course) => {
       courseStore.generateCertificate(course).then(response => {
-        return router.push({name: 'certificate', params: {identify: response.data.data.identify}})
+        // return router.push({name: 'certificate', params: {identify: response.data.data.identify}})
+        const { href } = router.resolve({
+          name: 'certificate',
+          params: {identify: response.data.data.identify},
+          query: { share: 1 },
+        });
+
+        window.open(href, '_blank');
       })
     }
 
