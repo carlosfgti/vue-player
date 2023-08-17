@@ -192,4 +192,8 @@ export default class CoursesGatewayHttp implements CoursesGateway {
       }
     )
   }
+
+  async getCertificate(identify: string): Promise<any> {
+    return await this.httpClient.get(`/certificate/${identify}`)
+  }
 }

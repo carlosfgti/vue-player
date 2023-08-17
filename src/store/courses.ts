@@ -15,6 +15,7 @@ export const useCoursesStore = defineStore('courses', {
     totalCourseComplete(state): number {
       if (!state.courseSelected) return 0
 
+      // @ts-ignore
       return this.calcTotalCourseCompleted(state.courseSelected)
     }
   },
@@ -63,6 +64,10 @@ export const useCoursesStore = defineStore('courses', {
 
     async generateCertificate(course: Course) {
       return await coursesGateway.generateCertificate(course)
+    },
+
+    async getCertificate(identify: string) {
+      return await coursesGateway.getCertificate(identify)
     }
   }
 })

@@ -6,4 +6,5 @@ export default interface CoursesGateway {
   get(id: string): Promise<Course>
   getMyCourses(params: { page: number; filter?: string }): Promise<MyCourseType>
   generateCertificate(course: Course): Promise<any>
+  getCertificate(identify: string): Promise<any>
 }

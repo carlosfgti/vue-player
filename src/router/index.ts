@@ -1,8 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useUsersStore } from '@/store/users'
+
 import Auth from '@/views/AuthPage.vue'
 import Player from '@/views/PlayerPage.vue'
-import { useUsersStore } from '@/store/users'
 import MyCourses from '@/views/MyCourses.vue'
+import Certificate from '@/views/CertificatePage.vue'
 
 const routes = [
   {
@@ -19,6 +21,11 @@ const routes = [
     path: '/player',
     name: 'player',
     component: Player
+  },
+  {
+    path: '/certificado/:identify',
+    name: 'certificate',
+    component: Certificate
   }
 ]
 
