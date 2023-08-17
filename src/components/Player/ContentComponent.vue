@@ -24,11 +24,14 @@ export default {
       }
     })
 
+    const openForum = () => window.open('https://academy.especializati.com.br/forum', '_blank')
+
     return {
       lessonStore,
       courseStore,
       toMyCourses,
-      logout
+      logout,
+      openForum
     }
   },
 }
@@ -63,6 +66,9 @@ export default {
       <ul>
         <li class="task-list__card">
           <p @click="toMyCourses" style="cursor: pointer;">Meus Cursos</p>
+        </li>
+        <li class="task-list__card">
+          <p @click="openForum">Fórum</p>
         </li>
         <li class="task-list__card">
           <p @click="logout" style="cursor: pointer;">Sair</p>
