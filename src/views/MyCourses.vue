@@ -9,6 +9,7 @@ export default {
   setup() {
     const courseStore = useCoursesStore()
     const loading = ref(false)
+    const loadingGenerateCertificate = ref(false)
     const filter = ref('')
 
     const fetchMyCourses = (page: number, filter: string) => {
@@ -29,6 +30,7 @@ export default {
     const nextPage = () => fetchMyCourses(courseStore.myCourses?.meta.nextPage ?? 1, filter.value)
     const previousPage = () => fetchMyCourses(courseStore.myCourses?.meta.previousPage ?? 1, filter.value)
     const getCertificate = (course: Course) => {
+      loadingGenerateCertificate.value = true
       courseStore.generateCertificate(course).then(response => {
         // return router.push({name: 'certificate', params: {identify: response.data.data.identify}})
         const { href } = router.resolve({
@@ -39,6 +41,7 @@ export default {
 
         window.open(href, '_blank');
       })
+      .finally(() => loadingGenerateCertificate.value = false)
     }
 
     return {
@@ -48,6 +51,7 @@ export default {
       nextPage,
       previousPage,
       getCertificate,
+      loadingGenerateCertificate
     }
   }
 }
@@ -72,7 +76,10 @@ export default {
           <h2 @click="setCourseSelected(course)">{{ course.name }}</h2>
           <div
             v-if="courseStore.calcTotalCourseCompleted(course) >= 100"
-            @click.prevent="getCertificate(course)">Certificado</div>
+            @click.prevent="getCertificate(course)" :class="{disable: loadingGenerateCertificate}">
+            <span v-if="loadingGenerateCertificate">Gerando...</span>
+            <span v-else>Certificado</span>
+          </div>
         </div>
       </div>
     </div>
