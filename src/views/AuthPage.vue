@@ -28,11 +28,14 @@ export default {
             .finally(() => loading.value = false)
           }
 
+    const openResetPassword = () => window.open('https://academy.especializati.com.br/password/reset', '_blank')
+
     return {
       email,
       password,
       loading,
-      auth
+      auth,
+      openResetPassword
     }
   }
 }
@@ -52,5 +55,6 @@ export default {
                                 <span v-else>Entrar</span>
                               </button>
     </form>
+    <a href="#" @click.prevent="openResetPassword">Esqueceu a Senha?</a>
   </div>
 </template>
