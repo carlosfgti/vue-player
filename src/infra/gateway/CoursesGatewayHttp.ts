@@ -86,9 +86,10 @@ export default class CoursesGatewayHttp implements CoursesGateway {
     return courses
   }
 
-  async getMyCourses(): Promise<MyCourseType> {
+  async getMyCourses(params: { page: number; filter?: string }): Promise<MyCourseType> {
     const token = localStorage.getItem('_oauth')
     const response = await this.httpClient.get('/my-courses', {
+      params,
       headers: {
         Authorization: `Bearer ${token}`
       }
