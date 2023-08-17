@@ -55,3 +55,15 @@
     font-weight: 600;
     margin: 18px 0px 22px 30%;
 }
+
+.share-options {
+  background: #00bf76;
+  padding: 10px;
+  text-align: center;
+}
+
+.share-options a {
+  color: aliceblue;
+  margin: 0 10px;
+  text-decoration: none;
+}
