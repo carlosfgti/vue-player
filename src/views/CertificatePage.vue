@@ -35,11 +35,6 @@ export default {
 }
 </script>
 
-<style scoped>
-/* Import Bootstrap CSS from CDN */
-@import url('https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css');
-</style>
-
 <template>
   <div v-if="loading">Carregando o certificado</div>
   <div v-else>
