@@ -10,22 +10,26 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: Auth
+    component: Auth,
+    meta: { requiresAuth: false }
   },
   {
     path: '/',
     name: 'my.courses',
-    component: MyCourses
+    component: MyCourses,
+    meta: { requiresAuth: true }
   },
   {
     path: '/player',
     name: 'player',
-    component: Player
+    component: Player,
+    meta: { requiresAuth: true }
   },
   {
     path: '/certificado/:identify',
     name: 'certificate',
-    component: Certificate
+    component: Certificate,
+    meta: { requiresAuth: false }
   }
 ]
 
@@ -38,7 +42,7 @@ router.beforeEach(async (to, _, next) => {
   const userStore = useUsersStore()
   const user = userStore.user
 
-  if (to.name != 'reset.password' && user === null) {
+  if (to.meta.requiresAuth && to.name != 'reset.password' && user === null) {
     const token = localStorage.getItem('_oauth')
     if (token === null && to.name != 'login') {
       return router.push({ name: 'login' })
