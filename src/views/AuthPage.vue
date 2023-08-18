@@ -23,7 +23,7 @@ export default {
                 if (error.status === 422) msgError = 'Dados Inválidos'
                 if (error.status === 404) msgError = 'Usuário Não Encontrado'
 
-                alert('Falha ao autenticar')
+                alert(msgError)
             })
             .finally(() => loading.value = false)
           }
