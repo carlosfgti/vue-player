@@ -5,7 +5,7 @@ export default class AxiosAdapter implements HttpClient {
   private axiosInstance: AxiosInstance
 
   constructor() {
-    const baseURL = 'http://localhost/ead'
+    const baseURL = import.meta.env.VITE_API_URL || 'http://localhost/ead'
     this.axiosInstance = axios.create({
       baseURL
     })
