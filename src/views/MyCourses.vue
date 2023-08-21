@@ -1,5 +1,6 @@
 <script lang="ts">
 import type Course from '@/entities/Course'
+import { useUsersStore } from '@/store/users'
 import { useCoursesStore } from '@/store/courses'
 import { onMounted, ref } from 'vue'
 import router from '@/router'
@@ -11,6 +12,7 @@ export default {
     const loading = ref(false)
     const loadingGenerateCertificate = ref(false)
     const filter = ref('')
+    const userStore = useUsersStore()
 
     const fetchMyCourses = (page: number, filter: string) => {
       loading.value = true
@@ -44,6 +46,8 @@ export default {
       .finally(() => loadingGenerateCertificate.value = false)
     }
 
+    const logout = () => userStore.logout().then(() => router.push({name: 'login'}))
+
     return {
       courseStore,
       loading,
@@ -51,7 +55,9 @@ export default {
       nextPage,
       previousPage,
       getCertificate,
-      loadingGenerateCertificate
+      loadingGenerateCertificate,
+      userStore,
+      logout
     }
   }
 }
@@ -59,7 +65,16 @@ export default {
 
 <template>
   <div>
-    <h1>Meus Cursos</h1>
+    <div class="menu-home">
+      <h1>Meus Cursos</h1>
+      <div class="user">
+        Olá, {{ userStore.user?.name }}!
+        <img v-if="userStore.user?.image" :src="userStore.user?.image" :alt="userStore.user?.name">
+        <ul>
+          <li><a href="#" @click.prevent="logout">Sair</a></li>
+        </ul>
+      </div>
+    </div>
     <div class="courses">
       <div class="loading" v-if="loading">Carregando os cursos</div>
       <div
