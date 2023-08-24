@@ -9,7 +9,7 @@ body {
 }
 
 .login-card {
-  width: 450px;
+  width: 400px;
   background-color: rgba(255, 255, 255, 0.3);
   padding: 3rem;
   border-radius: 10px;
@@ -24,7 +24,7 @@ body {
     position: absolute;
     background-color: rgba(255, 255, 255, 0.15);
     inset: 0;
-    transform: rotate(5deg);
+    transform: rotate(-5deg);
     border-radius: 10px;
     z-index: -1;
   }
@@ -95,6 +95,10 @@ body {
       &:focus-within {
         background-color: rgba(255, 255, 255, 0.5);
       }
+
+      &.error {
+        outline: 2px solid #cf5454;
+      }
     }
 
     .form-item-other {
@@ -114,22 +118,27 @@ body {
         cursor: pointer;
         padding: 1rem;
         text-transform: uppercase;
-        background: linear-gradient(45deg, #ff9100, #f0ad56);
+        background-color: #ff9100;
         outline: 2px solid transparent;
-        transition: 0.3s outline;
+        transition: 0.3s background-color;
         color: white;
 
         &:hover {
-          outline: 2px solid rgba(255, 255, 255, 0.5);
+          background-color: #f0ad56;
         }
       }
+    }
+
+    .form-item-erros {
+      text-align: center;
+      color: #cf1212;
     }
   }
 
   a {
     color: #292929;
     text-decoration: none;
-    transition: 0.5s color;
+    transition: 0.3s color;
 
     &:hover {
       color: #ff9100;

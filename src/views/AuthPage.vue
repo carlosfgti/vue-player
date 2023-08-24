@@ -1,6 +1,6 @@
 <script lang="ts">
 import router from '@/router'
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import { useUsersStore } from '@/store/users'
 
 export default {
@@ -9,22 +9,28 @@ export default {
     const email = ref('')
     const password = ref('')
     const loading = ref(false)
-
     const useStore = useUsersStore()
+
+    const error: any = reactive({
+      msgError: 'Falha na requisição',
+      active: false,
+      status: 0
+    })
 
     const auth = () => {
       loading.value = true
+      error.active = false
 
       useStore
         .login(email.value, password.value)
         .then(() => router.push({ name: 'player' }))
-        .catch((error) => {
-          let msgError = 'Falha na requisição'
+        .catch((_error: any) => {
+          error.msgError = 'Falha na requisição'
+          error.status = _error.response.status
+          error.active = true
 
-          if (error.status === 422) msgError = 'Dados Inválidos'
-          if (error.status === 404) msgError = 'Usuário Não Encontrado'
-
-          alert(msgError)
+          if (error.status === 422) error.msgError = 'Dados Inválidos'
+          if (error.status === 404) error.msgError = 'Usuário Não Encontrado'
         })
         .finally(() => (loading.value = false))
     }
@@ -33,10 +39,16 @@ export default {
       window.open('https://academy.especializati.com.br/password/reset', '_blank')
     }
 
+    const clearError = () => {
+      error.active = false
+    }
+
     return {
       email,
       password,
       loading,
+      error,
+      clearError,
       auth,
       openResetPassword
     }
@@ -58,19 +70,33 @@ export default {
       </div>
       <div class="body">
         <form @submit.prevent="auth" method="post">
-          <div class="form-item">
+          <div
+            class="form-item"
+            :class="{ error: error.active && (error.status == 422 || error.status == 404) }"
+          >
             <i class="far fa-envelope"></i>
-            <input type="email" name="email" v-model="email" placeholder="Seu E-mail" required />
+            <input
+              type="email"
+              name="email"
+              v-model="email"
+              placeholder="Seu E-mail"
+              @input="clearError"
+              required
+            />
           </div>
-          <div class="form-item">
+          <div class="form-item" :class="{ error: error.active && error.status == 422 }">
             <i class="far fa-lock"></i>
             <input
               type="password"
               name="password"
               v-model="password"
               placeholder="Sua Senha"
+              @input="clearError"
               required
             />
+          </div>
+          <div v-if="error.active" class="form-item-erros">
+            <span>{{ error.msgError }}</span>
           </div>
           <div class="form-item-other">
             <a href="#" @click.stop="openResetPassword">Esqueceu a Senha?</a>
