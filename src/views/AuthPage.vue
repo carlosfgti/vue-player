@@ -116,6 +116,6 @@ export default {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '../styles/pages/AuthPage.scss';
 </style>
