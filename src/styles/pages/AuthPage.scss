@@ -144,4 +144,18 @@ body {
       color: #ff9100;
     }
   }
+
+  @include respond-to('medium') {
+    width: 350px;
+  }
+
+  @include respond-to('small') {
+    width: 75%;
+    padding: 1.5rem;
+    margin: 0 auto;
+
+    &::before {
+      display: none;
+    }
+  }
 }
