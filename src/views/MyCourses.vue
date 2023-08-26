@@ -4,6 +4,7 @@ import { useUsersStore } from '@/store/users'
 import { useCoursesStore } from '@/store/courses'
 import { onMounted, ref } from 'vue'
 import router from '@/router'
+import NavbarComponent from '@/components/NavbarComponent.vue'
 
 export default {
   name: 'MyCourses',
@@ -13,7 +14,6 @@ export default {
     const loading = ref(false)
     const loadingGenerateCertificate = ref(false)
     const filter = ref('')
-    const userStore = useUsersStore()
 
     const fetchMyCourses = (page: number, filter: string) => {
       loading.value = true
@@ -53,10 +53,6 @@ export default {
         .finally(() => (loadingGenerateCertificate.value = false))
     }
 
-    const logout = () => {
-      userStore.logout().then(() => router.push({ name: 'login' }))
-    }
-
     return {
       courseStore,
       loading,
@@ -64,10 +60,12 @@ export default {
       nextPage,
       previousPage,
       getCertificate,
-      loadingGenerateCertificate,
-      userStore,
-      logout
+      loadingGenerateCertificate
     }
+  },
+
+  components: {
+    NavbarComponent
   }
 }
 </script>
@@ -75,20 +73,7 @@ export default {
 <template>
   <div id="my-courses-wrapper">
     <header>
-      <nav class="navbar">
-        <h1>Meus Cursos</h1>
-        <!-- <div class="user">
-          Olá, {{ userStore.user?.name }}!
-          <img
-            v-if="userStore.user?.image"
-            :src="userStore.user?.image"
-            :alt="userStore.user?.name"
-          />
-          <ul>
-            <li><a href="#" @click.prevent="logout">Sair</a></li>
-          </ul>
-        </div> -->
-      </nav>
+      <NavbarComponent />
     </header>
     <main>
       <div class="courses">

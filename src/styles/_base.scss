@@ -20,6 +20,10 @@ ol[role='list'] {
   list-style: none;
 }
 
+[role='button'] {
+  cursor: pointer;
+}
+
 html {
   scroll-behavior: smooth;
 }
