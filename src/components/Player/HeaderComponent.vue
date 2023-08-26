@@ -1,6 +1,5 @@
 <script lang="ts">
-import '@/assets/header.css'
-import { useLessonsStore } from '@/store/lessons';
+import { useLessonsStore } from '@/store/lessons'
 
 export default {
   name: 'HeaderComponent',
@@ -10,7 +9,7 @@ export default {
     return {
       storeLesson
     }
-  },
+  }
 }
 </script>
 
@@ -18,8 +17,20 @@ export default {
   <header class="header_player">
     <div class="header_home"></div>
     <nav class="button-group">
-      <button class="button button--outline" v-if="storeLesson.lessonPlayer" @click="storeLesson.previousLesson(storeLesson.lessonPlayer)">Aula Anterior</button>
-      <button class="button button--primary" v-if="storeLesson.lessonPlayer" @click="storeLesson.nextLesson(storeLesson.lessonPlayer)">Próxima Aula</button>
+      <button
+        class="button button--outline"
+        v-if="storeLesson.lessonPlayer"
+        @click="storeLesson.previousLesson(storeLesson.lessonPlayer)"
+      >
+        Aula Anterior
+      </button>
+      <button
+        class="button button--primary"
+        v-if="storeLesson.lessonPlayer"
+        @click="storeLesson.nextLesson(storeLesson.lessonPlayer)"
+      >
+        Próxima Aula
+      </button>
     </nav>
   </header>
 </template>
