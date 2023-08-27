@@ -15,6 +15,7 @@
   --dark-light: #3b3b3b;
   --danger: #cf1212;
   --danger-light: #cf5454;
+  --light: #cccccc;
 
   // COLORS ALPHA
   --a-opaque: rgba(255, 255, 255, 0.15);
@@ -24,4 +25,7 @@
   // DIMENSIONS
   --padding: 5rem;
   --padding-responsive: 1rem;
+
+  // SHADOW
+  --default-box-shadow: 2px 1px 5px 1px rgba(0, 0, 0, 0.2);
 }
