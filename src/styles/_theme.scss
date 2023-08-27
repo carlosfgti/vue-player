@@ -9,6 +9,19 @@
   --font-size-large: 1.5rem;
 
   // COLORS
-  --primary: #8331a5;
-  --primary-light: #b77dcf;
+  --primary: #ff9100;
+  --primary-light: #f0ad56;
+  --dark: #292929;
+  --dark-light: #3b3b3b;
+  --danger: #cf1212;
+  --danger-light: #cf5454;
+
+  // COLORS ALPHA
+  --a-opaque: rgba(255, 255, 255, 0.15);
+  --a-light: rgba(255, 255, 255, 0.3);
+  --a-medium: rgba(255, 255, 255, 0.5);
+
+  // DIMENSIONS
+  --padding: 5rem;
+  --padding-responsive: 1rem;
 }

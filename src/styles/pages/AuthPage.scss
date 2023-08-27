@@ -2,7 +2,7 @@
 @import '../_variables';
 
 .login-card-container {
-  background: linear-gradient(45deg, #292929, #3b3b3b);
+  background: linear-gradient(45deg, $dark, $dark-light);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,20 +11,20 @@
 
 .login-card {
   width: 400px;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: $a-light;
   padding: 3rem;
   border-radius: 10px;
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  color: #292929;
+  color: $dark;
   z-index: 1;
 
   &::before {
     content: '';
     position: absolute;
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: $a-opaque;
     inset: 0;
     transform: rotate(-5deg);
     border-radius: 10px;
@@ -47,7 +47,7 @@
     align-items: center;
 
     span:first-child {
-      font-size: 1.5rem;
+      font-size: $font-size-large;
       font-weight: 500;
       margin-bottom: 5px;
     }
@@ -59,7 +59,7 @@
 
   .footer {
     text-align: center;
-    font-size: 0.8rem;
+    font-size: $font-size;
     font-weight: 300;
   }
 
@@ -70,7 +70,7 @@
 
     .form-item {
       padding: 1rem;
-      background-color: rgba(255, 255, 255, 0.15);
+      background-color: $a-opaque;
       border-radius: 100px;
       display: flex;
       align-items: center;
@@ -89,17 +89,17 @@
       }
 
       i {
-        color: #3b3b3b;
+        color: $dark-light;
         opacity: 0.5;
-        font-size: 1rem;
+        font-size: $font-size-normal;
       }
 
       &:focus-within {
-        background-color: rgba(255, 255, 255, 0.5);
+        background-color: $a-medium;
       }
 
       &.error {
-        outline: 2px solid #cf5454;
+        outline: 2px solid $danger-light;
       }
     }
 
@@ -120,30 +120,30 @@
         cursor: pointer;
         padding: 1rem;
         text-transform: uppercase;
-        background-color: #ff9100;
+        background-color: $primary;
         outline: 2px solid transparent;
         transition: 0.3s background-color;
         color: white;
 
         &:hover {
-          background-color: #f0ad56;
+          background-color: $primary-light;
         }
       }
     }
 
     .form-item-erros {
       text-align: center;
-      color: #cf1212;
+      color: $danger;
     }
   }
 
   a {
-    color: #292929;
+    color: $dark;
     text-decoration: none;
     transition: 0.3s color;
 
     &:hover {
-      color: #ff9100;
+      color: $primary;
     }
   }
 

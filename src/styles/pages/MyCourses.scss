@@ -2,6 +2,6 @@
 @import '../_variables';
 
 #my-courses-wrapper {
-  background: linear-gradient(45deg, #292929, #3b3b3b);
+  background: linear-gradient(45deg, $dark, $dark-light);
   min-height: 100vh;
 }

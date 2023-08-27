@@ -7,10 +7,15 @@
   align-items: center;
   justify-content: space-between;
   // position: fixed;
-  width: calc(100% - 10rem);
-  background-color: #292929;
-  padding: 0 5rem;
+  width: calc(100% - $padding * 2);
+  background-color: $dark;
+  padding: 0 $padding;
   box-shadow: 2px 1px 5px 1px rgba(0, 0, 0, 0.2);
+
+  @include respond-to('big') {
+    width: calc(100% - $padding-responsive * 2);
+    padding: 0 $padding-responsive;
+  }
 }
 
 .brand {
@@ -27,7 +32,7 @@
   transition: 0.5s outline;
 
   i {
-    font-size: 2rem;
+    font-size: calc($font-size-normal * 2);
     pointer-events: none;
   }
 }
@@ -73,8 +78,8 @@
   }
 
   .name {
-    font-size: var(--font-size-small);
-    color: #ff9100;
+    font-size: $font-size-small;
+    color: $primary;
     pointer-events: none;
   }
 }
@@ -91,7 +96,7 @@
 
     &:hover,
     &.active {
-      background-color: #ff9100;
+      background-color: $primary;
       color: white;
     }
   }
