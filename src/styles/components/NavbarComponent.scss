@@ -7,9 +7,9 @@
   align-items: center;
   justify-content: space-between;
   // position: fixed;
-  width: calc(100% - 4rem);
+  width: calc(100% - 10rem);
   background-color: #292929;
-  padding: 0 2rem;
+  padding: 0 5rem;
   box-shadow: 2px 1px 5px 1px rgba(0, 0, 0, 0.2);
 }
 
@@ -28,6 +28,7 @@
 
   i {
     font-size: 2rem;
+    pointer-events: none;
   }
 }
 
@@ -38,7 +39,7 @@
   position: absolute;
   z-index: 99;
   right: 0;
-  top: 40px;
+  top: 50px;
   width: 0;
   height: 0;
   border-radius: 10px;
@@ -62,15 +63,19 @@
     width: 100px;
     margin-bottom: 0.5rem;
     border: 2px solid #cccccc;
+    pointer-events: none;
+    object-fit: cover;
   }
 
   .title {
     color: #bbbbbb;
+    pointer-events: none;
   }
 
   .name {
     font-size: var(--font-size-small);
     color: #ff9100;
+    pointer-events: none;
   }
 }
 
@@ -84,7 +89,8 @@
     border-radius: 20px;
     transition: 0.5s background-color;
 
-    &:hover {
+    &:hover,
+    &.active {
       background-color: #ff9100;
       color: white;
     }
@@ -94,7 +100,7 @@
 .menu-wrapper {
   position: relative;
 
-  &:hover {
+  &.active {
     .collapse-menu {
       outline: 1px solid #cccccc;
     }

@@ -76,7 +76,7 @@ export default {
       <NavbarComponent />
     </header>
     <main>
-      <div class="courses">
+      <div class="courses" style="display: none">
         <div class="loading" v-if="loading">Carregando os cursos</div>
         <div class="course" v-for="(course, index) in courseStore.myCourses?.data" :key="index">
           <div class="image-course" :style="{ backgroundColor: course.color }">
@@ -106,7 +106,7 @@ export default {
           </div>
         </div>
       </div>
-      <div class="pagination" v-if="courseStore.myCourses?.meta">
+      <div class="pagination" style="display: none" v-if="courseStore.myCourses?.meta">
         <a
           href="#"
           @click.prevent="previousPage"

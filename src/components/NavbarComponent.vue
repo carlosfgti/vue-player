@@ -1,19 +1,35 @@
 <script lang="ts">
 import { useUsersStore } from '@/store/users'
+import { ref } from 'vue'
 import router from '@/router'
 
 export default {
   name: 'NavbarComponent',
   setup() {
     const userStore = useUsersStore()
+    const active = ref(false)
 
     const logout = () => {
       userStore.logout().then(() => router.push({ name: 'login' }))
     }
 
+    const toggleNavbar = () => {
+      active.value = !active.value
+    }
+
+    window.addEventListener('click', (e: any) => {
+      e.stopPropagation()
+      if (e.target.classList.contains('menu-content')) return
+      if (e.target.classList.contains('user-info')) return
+      if (e.target.classList.contains('nav-item')) return
+      if (active.value) toggleNavbar()
+    })
+
     return {
       userStore,
-      logout
+      logout,
+      active,
+      toggleNavbar
     }
   }
 }
@@ -26,8 +42,8 @@ export default {
         <img src="@/assets/images/logo-especializati.png" alt="EspecializaTi Academy" />
       </span>
     </div>
-    <div class="menu-wrapper">
-      <span class="collapse-menu" role="button">
+    <div class="menu-wrapper" :class="{ active: active }">
+      <span class="collapse-menu" role="button" @click.stop="toggleNavbar">
         <i class="fal fa-bars"></i>
       </span>
       <div class="menu-content">
