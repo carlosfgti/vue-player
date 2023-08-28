@@ -11,6 +11,7 @@ export const useCoursesStore = defineStore('courses', {
     myCourses: null as MyCourseType | null,
     courseSelected: null as Course | null
   }),
+
   getters: {
     totalCourseComplete(state): number {
       if (!state.courseSelected) return 0
@@ -19,13 +20,16 @@ export const useCoursesStore = defineStore('courses', {
       return this.calcTotalCourseCompleted(state.courseSelected)
     }
   },
+
   actions: {
     async getAllCourses() {
       this.courses = await coursesGateway.getAll()
     },
+
     async getCourse(id: string) {
       this.courseSelected = await coursesGateway.get(id)
     },
+
     markLessonViewed(lessonUrl: string): void {
       if (!this.courseSelected) return
 
@@ -38,6 +42,7 @@ export const useCoursesStore = defineStore('courses', {
         })
       })
     },
+
     async fetchMyCourses(page: number, filter?: string) {
       const params = {
         page,
@@ -45,6 +50,7 @@ export const useCoursesStore = defineStore('courses', {
       }
       this.myCourses = await coursesGateway.getMyCourses(params)
     },
+
     calcTotalCourseCompleted(course: Course): number {
       let totalLessonsCourse = 0
       let totalLessonsWithViews = 0

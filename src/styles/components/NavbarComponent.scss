@@ -6,11 +6,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  // position: fixed;
   width: calc(100% - $padding * 2);
   background-color: $dark;
   padding: 0 $padding;
   box-shadow: $default-box-shadow;
+
+  &.affix {
+    position: fixed;
+    z-index: 999;
+  }
 
   @include respond-to('big') {
     width: calc(100% - $padding-responsive * 2);
@@ -34,6 +38,10 @@
   i {
     font-size: calc($font-size-normal * 2);
     pointer-events: none;
+  }
+
+  &:hover {
+    outline: 1px solid $light;
   }
 }
 

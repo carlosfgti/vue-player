@@ -17,6 +17,16 @@ export default {
       active.value = !active.value
     }
 
+    const affix = () => {
+      const navbar = document.getElementById('navbar')
+      if (!navbar) return
+
+      if (window.scrollY > 0) navbar.classList.add('affix')
+      else navbar.classList.remove('affix')
+    }
+
+    window.onscroll = () => affix()
+
     window.addEventListener('click', (e: any) => {
       e.stopPropagation()
       if (e.target.classList.contains('menu-content')) return

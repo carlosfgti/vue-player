@@ -111,24 +111,6 @@
     .form-actions {
       display: flex;
       justify-content: space-evenly;
-
-      button {
-        width: 100%;
-        border-radius: 100px;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        padding: 1rem;
-        text-transform: uppercase;
-        background-color: $primary;
-        outline: 2px solid transparent;
-        transition: 0.3s background-color;
-        color: white;
-
-        &:hover {
-          background-color: $primary-light;
-        }
-      }
     }
 
     .form-item-erros {

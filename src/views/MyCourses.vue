@@ -1,6 +1,5 @@
 <script lang="ts">
 import type Course from '@/entities/Course'
-import { useUsersStore } from '@/store/users'
 import { useCoursesStore } from '@/store/courses'
 import { onMounted, ref } from 'vue'
 import router from '@/router'
@@ -12,12 +11,14 @@ export default {
   setup() {
     const courseStore = useCoursesStore()
     const loading = ref(false)
-    const loadingGenerateCertificate = ref(false)
     const filter = ref('')
 
     const fetchMyCourses = (page: number, filter: string) => {
       loading.value = true
-      courseStore.fetchMyCourses(page, filter).finally(() => (loading.value = false))
+      courseStore.fetchMyCourses(page, filter).finally(() => {
+        loading.value = false
+        calcProgressBar()
+      })
     }
 
     onMounted(() => {
@@ -38,7 +39,8 @@ export default {
     }
 
     const getCertificate = (course: Course) => {
-      loadingGenerateCertificate.value = true
+      course.loadingGenerateCertificate = true
+
       courseStore
         .generateCertificate(course)
         .then((response) => {
@@ -50,7 +52,20 @@ export default {
 
           window.open(href, '_blank')
         })
-        .finally(() => (loadingGenerateCertificate.value = false))
+        .finally(() => {
+          course.loadingGenerateCertificate = false
+        })
+    }
+
+    const calcProgressBar = () => {
+      setTimeout(() => {
+        const bar = document.querySelectorAll('.bar')
+
+        bar.forEach((itemBar: any) => {
+          const width = itemBar.getAttribute('data-percent')
+          itemBar.style.width = `${width}%`
+        })
+      }, 100)
     }
 
     return {
@@ -59,8 +74,7 @@ export default {
       setCourseSelected,
       nextPage,
       previousPage,
-      getCertificate,
-      loadingGenerateCertificate
+      getCertificate
     }
   },
 
@@ -76,49 +90,67 @@ export default {
       <NavbarComponent />
     </header>
     <main>
-      <div class="courses" style="display: none">
-        <div class="loading" v-if="loading">Carregando os cursos</div>
-        <div class="course" v-for="(course, index) in courseStore.myCourses?.data" :key="index">
-          <div class="image-course" :style="{ backgroundColor: course.color }">
-            <img
-              :src="course.image"
-              :alt="course.name"
-              style="max-width: 200px"
-              @click="setCourseSelected(course)"
-            />
-          </div>
-          <div class="content-course">
-            <div class="progress-bar">
-              <div
-                class="progress"
-                :style="{ width: `${courseStore.calcTotalCourseCompleted(course)}%` }"
-              ></div>
+      <div class="content">
+        <span class="page-title" v-if="loading">Carregando...</span>
+        <span class="page-title" v-else>
+          <i class="fas fa-books"></i>
+          Meus Cursos
+        </span>
+        <div class="courses">
+          <div
+            class="card"
+            v-for="(course, index) in courseStore.myCourses?.data"
+            :key="index"
+            role="button"
+            @click.stop="setCourseSelected(course)"
+          >
+            <div class="header" :style="{ backgroundColor: course.color }">
+              <img :src="course.image" :alt="course.name" style="max-width: 200px" />
             </div>
-            <h2 @click="setCourseSelected(course)">{{ course.name }}</h2>
             <div
-              v-if="courseStore.calcTotalCourseCompleted(course) >= 100"
-              @click.prevent="getCertificate(course)"
-              :class="{ disable: loadingGenerateCertificate }"
+              class="progress"
+              :class="{ hidden: courseStore.calcTotalCourseCompleted(course) < 1 }"
             >
-              <span v-if="loadingGenerateCertificate">Gerando...</span>
-              <span v-else>Certificado</span>
+              <span class="bar" :data-percent="courseStore.calcTotalCourseCompleted(course)"></span>
+            </div>
+            <div class="body">
+              <h3 class="name">{{ course.name }}</h3>
+              <div class="description" v-html="course.description"></div>
+            </div>
+            <div class="footer">
+              <button
+                role="button"
+                v-if="courseStore.calcTotalCourseCompleted(course) >= 100"
+                @click.stop="getCertificate(course)"
+                class="btn"
+                :class="{ disable: course.loadingGenerateCertificate }"
+              >
+                <span v-if="course.loadingGenerateCertificate">Gerando...</span>
+                <span v-else>
+                  <i class="fas fa-graduation-cap"></i>
+                  Certificado
+                </span>
+              </button>
             </div>
           </div>
         </div>
-      </div>
-      <div class="pagination" style="display: none" v-if="courseStore.myCourses?.meta">
-        <a
-          href="#"
-          @click.prevent="previousPage"
-          :class="['prev', { 'disable-pagination': !courseStore.myCourses?.meta.hasPreviousPage }]"
-          >Voltar</a
-        >
-        <a
-          href="#"
-          @click.prevent="nextPage"
-          :class="['next', { 'disable-pagination': !courseStore.myCourses?.meta.hasNextPage }]"
-          >Próxima</a
-        >
+        <div class="pagination" style="display: none" v-if="courseStore.myCourses?.meta">
+          <a
+            href="#"
+            @click.prevent="previousPage"
+            :class="[
+              'prev',
+              { 'disable-pagination': !courseStore.myCourses?.meta.hasPreviousPage }
+            ]"
+            >Voltar</a
+          >
+          <a
+            href="#"
+            @click.prevent="nextPage"
+            :class="['next', { 'disable-pagination': !courseStore.myCourses?.meta.hasNextPage }]"
+            >Próxima</a
+          >
+        </div>
       </div>
     </main>
   </div>
