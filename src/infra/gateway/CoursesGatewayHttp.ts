@@ -170,9 +170,9 @@ export default class CoursesGatewayHttp implements CoursesGateway {
       meta: {
         total: meta.total,
         currentPage: meta.current_page,
-        nextPage: meta.current_page + 1 < meta.last_page ? meta.current_page + 1 : null,
+        nextPage: meta.current_page + 1 <= meta.last_page ? meta.current_page + 1 : null,
         previousPage: meta.current_page - 1 > 0 ? meta.current_page - 1 : null,
-        hasNextPage: meta.current_page + 1 < meta.last_page,
+        hasNextPage: meta.current_page + 1 <= meta.last_page,
         hasPreviousPage: meta.current_page - 1 > 0,
         lastPage: meta.last_page,
         totalPerPage: meta.to

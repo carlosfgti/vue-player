@@ -12,6 +12,10 @@
 }
 
 button.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
   width: 100%;
   border-radius: 100px;
   border: none;
@@ -26,5 +30,12 @@ button.btn {
 
   &:hover {
     background-color: $primary-light;
+  }
+
+  &:disabled,
+  &[disabled] {
+    background-color: $light;
+    color: #666666;
+    cursor: not-allowed;
   }
 }

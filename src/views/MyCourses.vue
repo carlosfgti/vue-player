@@ -31,11 +31,11 @@ export default {
     }
 
     const nextPage = () => {
-      fetchMyCourses(courseStore.myCourses?.meta.nextPage ?? 1, filter.value)
+      fetchMyCourses(courseStore.myCourses?.meta.nextPage || 1, filter.value)
     }
 
     const previousPage = () => {
-      fetchMyCourses(courseStore.myCourses?.meta.previousPage ?? 1, filter.value)
+      fetchMyCourses(courseStore.myCourses?.meta.previousPage || 1, filter.value)
     }
 
     const getCertificate = (course: Course) => {
@@ -123,7 +123,7 @@ export default {
                 v-if="courseStore.calcTotalCourseCompleted(course) >= 100"
                 @click.stop="getCertificate(course)"
                 class="btn"
-                :class="{ disable: course.loadingGenerateCertificate }"
+                :disabled="course.loadingGenerateCertificate"
               >
                 <span v-if="course.loadingGenerateCertificate">Gerando...</span>
                 <span v-else>
@@ -134,22 +134,23 @@ export default {
             </div>
           </div>
         </div>
-        <div class="pagination" style="display: none" v-if="courseStore.myCourses?.meta">
-          <a
-            href="#"
-            @click.prevent="previousPage"
-            :class="[
-              'prev',
-              { 'disable-pagination': !courseStore.myCourses?.meta.hasPreviousPage }
-            ]"
-            >Voltar</a
+        <div class="pagination" v-if="courseStore.myCourses?.meta">
+          <button
+            class="btn prev"
+            @click.stop="previousPage"
+            :disabled="!courseStore.myCourses?.meta.hasPreviousPage"
           >
-          <a
-            href="#"
-            @click.prevent="nextPage"
-            :class="['next', { 'disable-pagination': !courseStore.myCourses?.meta.hasNextPage }]"
-            >Próxima</a
+            <i class="fas fa-chevron-left"></i>
+            <span>Voltar</span>
+          </button>
+          <button
+            class="btn next"
+            @click.stop="nextPage"
+            :disabled="!courseStore.myCourses?.meta.hasNextPage"
           >
+            <span>Próxima</span>
+            <i class="fas fa-chevron-right"></i>
+          </button>
         </div>
       </div>
     </main>

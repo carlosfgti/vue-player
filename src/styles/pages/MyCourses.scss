@@ -9,7 +9,7 @@
 .page-title {
   color: $light;
   font-size: $font-size-normal;
-  padding: 1rem 0;
+  padding: 1.5rem 0;
   text-align: center;
 }
 
@@ -28,9 +28,10 @@
     box-shadow: $default-box-shadow;
     background-color: $dark-light;
     color: $light;
-    transition: 0.3s transform;
     flex-basis: calc((100% / 5) - (0.8rem));
     max-width: 350px;
+    outline: 2px solid transparent;
+    transition: 0.5s outline linear, 0.3s transform ease-out;
 
     .header {
       display: flex;
@@ -43,14 +44,14 @@
         width: 100px;
         height: auto;
         object-fit: cover;
-        transition: 0.5s transform;
+        transition: 0.5s transform ease-out;
       }
     }
 
     .progress {
       width: 100%;
       height: 5px;
-      background-color: $dark;
+      background-color: $a-light;
 
       .bar {
         background-color: $danger-light;
@@ -91,7 +92,7 @@
       transform: scale(1.02);
 
       .header img {
-        transform: scale(1.1);
+        transform: scale(1.2);
       }
 
       .body .name {
@@ -114,6 +115,23 @@
     @include respond-to('small') {
       max-width: 100%;
       flex-basis: 100%;
+    }
+  }
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+
+  button {
+    max-width: 200px;
+    padding: 0.5rem;
+
+    i {
+      font-size: calc($font-size-normal * 0.6);
     }
   }
 }
