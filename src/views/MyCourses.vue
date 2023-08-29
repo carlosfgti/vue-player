@@ -158,5 +158,5 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-@import '../styles/pages/MyCourses.scss';
+@import '../styles/pages/MyCoursesPage.scss';
 </style>

@@ -52,17 +52,13 @@ export default {
         <img src="@/assets/images/logo-especializati.png" alt="EspecializaTi Academy" />
       </span>
     </div>
-    <div class="menu-wrapper" :class="{ active: active }">
+    <div v-if="userStore.user" class="menu-wrapper" :class="{ active: active }">
       <span class="collapse-menu" role="button" @click.stop="toggleNavbar">
         <i class="fal fa-bars"></i>
       </span>
       <div class="menu-content">
         <div class="user-info">
-          <img
-            v-if="userStore.user?.image"
-            :src="userStore.user?.image"
-            :alt="userStore.user?.name"
-          />
+          <img v-if="userStore.user.image" :src="userStore.user.image" :alt="userStore.user.name" />
           <img v-else src="https://picsum.photos/200" :alt="userStore.user?.name" />
           <span class="title">Bem vindo!</span>
           <span class="name">{{ userStore.user?.name }}!</span>

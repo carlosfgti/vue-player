@@ -31,6 +31,7 @@
     flex-basis: calc((100% / 5) - (0.8rem));
     max-width: 350px;
     outline: 2px solid transparent;
+    backface-visibility: hidden;
     transition: 0.5s outline linear, 0.3s transform ease-out;
 
     .header {
