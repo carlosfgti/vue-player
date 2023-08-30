@@ -1,0 +1,123 @@
+@import '../_breakpoints';
+@import '../_variables';
+
+.course-details {
+  padding: 1rem 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .progress-bar {
+    width: 86px;
+    height: 86px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  figure {
+    position: absolute;
+    border-radius: 100px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+
+    img {
+      width: 50px;
+      object-fit: cover;
+    }
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    span {
+      color: $light;
+    }
+  }
+
+  .title {
+    color: $primary;
+    word-break: break-word;
+  }
+}
+
+hr {
+  border-color: rgba(255, 255, 255, 0.1);
+  margin: 0 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.module-content {
+  padding: 0.5rem;
+  overflow-y: auto;
+  max-height: calc(100vh - 80px - 165px);
+}
+
+.modules {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.module-category {
+  .title {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $a-light;
+    border-radius: 5px;
+    color: $light;
+    font-size: $font-size-small;
+  }
+
+  .module-lessons {
+    padding: 0.5rem;
+    border-radius: 0 0 5px 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: $light;
+  }
+}
+
+.module-item {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.5rem;
+
+  &:last-child {
+    border: none;
+    padding-bottom: 0rem;
+  }
+
+  .title-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+    transition: 0.5s background-color;
+
+    .check {
+      font-size: $font-size-normal;
+
+      &.active {
+        color: $primary;
+      }
+    }
+
+    &:hover,
+    &.active {
+      background-color: $a-opaque;
+    }
+  }
+}

@@ -1,5 +1,4 @@
 <script lang="ts">
-import '@/assets/player.css'
 import { useLessonsStore } from '@/store/lessons'
 
 export default {
@@ -10,7 +9,7 @@ export default {
     return {
       lessonStore
     }
-  },
+  }
 }
 </script>
 
@@ -24,7 +23,10 @@ export default {
   ></iframe>
   <div></div>
   <div class="content-lesson">
-    <div v-if="lessonStore.lessonPlayer?.description" v-html="lessonStore.lessonPlayer?.description"></div>
+    <div
+      v-if="lessonStore.lessonPlayer?.description"
+      v-html="lessonStore.lessonPlayer?.description"
+    ></div>
     <div v-else>---</div>
   </div>
 </template>
