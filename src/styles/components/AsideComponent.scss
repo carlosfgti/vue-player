@@ -60,6 +60,10 @@ hr {
   padding: 0.5rem;
   overflow-y: auto;
   max-height: calc(100vh - 80px - 165px);
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .modules {
@@ -74,19 +78,38 @@ hr {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: $a-light;
+    background-color: $a-opaque;
     border-radius: 5px;
     color: $light;
     font-size: $font-size-small;
+
+    i {
+      transition: 0.3s transform;
+      transform-origin: 2px;
+      transform: rotate(0);
+    }
   }
 
   .module-lessons {
     padding: 0.5rem;
     border-radius: 0 0 5px 5px;
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 0.5rem;
+    opacity: none;
     color: $light;
+  }
+
+  &.active {
+    .title {
+      i {
+        transform: rotate(90deg);
+      }
+    }
+
+    .module-lessons {
+      display: flex;
+    }
   }
 }
 

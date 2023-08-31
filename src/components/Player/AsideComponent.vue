@@ -1,8 +1,8 @@
 <script lang="ts">
+import type Module from '@/entities/Module'
 import router from '@/router'
 import { useCoursesStore } from '@/store/courses'
 import { useLessonsStore } from '@/store/lessons'
-import { useUsersStore } from '@/store/users'
 import { onMounted } from 'vue'
 
 export default {
@@ -10,7 +10,6 @@ export default {
   setup() {
     const lessonStore = useLessonsStore()
     const courseStore = useCoursesStore()
-    const useStore = useUsersStore()
 
     const toMyCourses = () => router.push({ name: 'my.courses' })
 
@@ -22,11 +21,16 @@ export default {
 
     const openForum = () => window.open('https://academy.especializati.com.br/forum', '_blank')
 
+    const toggleModule = (moduleItem: Module) => {
+      moduleItem.open = !moduleItem.open
+    }
+
     return {
       lessonStore,
       courseStore,
       toMyCourses,
-      openForum
+      openForum,
+      toggleModule
     }
   }
 }
@@ -61,9 +65,11 @@ export default {
           v-for="(moduleItem, index) in courseStore.courseSelected.modules"
           :key="index"
           class="module-category"
+          :class="{ active: moduleItem.open }"
         >
-          <div class="title" role="button">
+          <div class="title" role="button" @click.stop="toggleModule(moduleItem)">
             <span>{{ moduleItem.name }}</span>
+            <i class="fas fa-caret-right"></i>
           </div>
           <ul class="module-lessons" role="list">
             <li v-for="lesson in moduleItem.lessons" :key="lesson.url" class="module-item">
@@ -73,7 +79,6 @@ export default {
                 @click.stop="lessonStore.addLessonPlayer(lesson)"
                 :class="{ active: lessonStore.lessonPlayer == lesson }"
               >
-                <!-- <input type="checkbox" name="completed" id="" :checked="lesson.views > 0" /> -->
                 <i class="check fas fa-check" :class="{ active: lesson.views > 0 }"></i>
                 <span class="">{{ lesson.name }}</span>
               </div>

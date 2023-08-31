@@ -6,6 +6,7 @@ export default class Module {
     readonly name: string,
     readonly description: string,
     readonly lessons?: Lesson[],
-    readonly course?: Course
+    readonly course?: Course,
+    public open: boolean = true
   ) {}
 }

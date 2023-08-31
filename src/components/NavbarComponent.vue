@@ -39,7 +39,8 @@ export default {
       userStore,
       logout,
       active,
-      toggleNavbar
+      toggleNavbar,
+      router
     }
   }
 }
@@ -48,7 +49,7 @@ export default {
 <template>
   <nav id="navbar">
     <div class="brand">
-      <span role="button">
+      <span role="button" @click.stop="router.push({ name: 'my.courses' })">
         <img src="@/assets/images/logo-especializati.png" alt="EspecializaTi Academy" />
       </span>
     </div>
