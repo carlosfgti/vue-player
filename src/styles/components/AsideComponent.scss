@@ -51,10 +51,24 @@
       li {
         color: $primary;
         transition: 0.5s color;
-        font-size: $font-size-small;
+        display: flex;
+        gap: 5px;
+
+        span {
+          color: $light;
+          transition: 0.5s color;
+        }
+
+        i {
+          font-size: $font-size-small;
+        }
 
         &:hover {
           color: $primary-light;
+
+          span {
+            color: $primary-light;
+          }
         }
       }
     }

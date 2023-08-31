@@ -70,9 +70,11 @@ export default {
         <ul role="list">
           <li role="button" @click="toMyCourses" title="Meus cursos">
             <i class="fas fa-books"></i>
+            <span>Meus cursos</span>
           </li>
           <li role="button" @click="openForum" title="Abrir fórum">
-            <i class="fab fa-discourse"></i>
+            <i class="far fa-comments-alt"></i>
+            <span>fórum</span>
           </li>
         </ul>
       </div>
