@@ -26,6 +26,7 @@ export default {
       ></iframe>
     </div>
     <div class="navigator">
+      <!-- TODO: Disable these buttons when the prev and next course doesn't exit -->
       <button
         class="btn"
         v-if="lessonStore.lessonPlayer"
@@ -45,6 +46,7 @@ export default {
         <i class="fas fa-chevron-right"></i>
       </button>
     </div>
+    <!-- TODO: Could be these content a clickable link?-->
     <div v-if="lessonStore.lessonPlayer" class="content-lesson">
       <div
         v-if="lessonStore.lessonPlayer.description"
