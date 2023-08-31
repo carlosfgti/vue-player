@@ -11,6 +11,10 @@ header {
   z-index: 99;
 }
 
+main {
+  display: flex;
+}
+
 aside {
   width: 350px;
   height: calc(100vh - 80px);
