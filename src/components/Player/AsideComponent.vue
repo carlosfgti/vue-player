@@ -3,18 +3,20 @@ import type Module from '@/entities/Module'
 import router from '@/router'
 import { useCoursesStore } from '@/store/courses'
 import { useLessonsStore } from '@/store/lessons'
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 
 export default {
   name: 'AsideComponent',
   setup() {
     const lessonStore = useLessonsStore()
     const courseStore = useCoursesStore()
+    const collapse = ref(false)
 
     const toMyCourses = () => router.push({ name: 'my.courses' })
 
     onMounted(() => {
       if (courseStore.courseSelected === null) return toMyCourses()
+      if (window.screen.width <= 992) collapse.value = true
     })
 
     const openForum = () => window.open('https://academy.especializati.com.br/forum', '_blank')
@@ -23,20 +25,31 @@ export default {
       moduleItem.open = !moduleItem.open
     }
 
+    const toogleCollapse = () => {
+      collapse.value = !collapse.value
+    }
+
     return {
       lessonStore,
       courseStore,
       toMyCourses,
       openForum,
-      toggleModule
+      toggleModule,
+      collapse,
+      toogleCollapse
     }
   }
 }
 </script>
 
 <template>
-  <aside v-if="courseStore.courseSelected">
-    <div class="course-details">
+  <aside v-if="courseStore.courseSelected" :class="{ collapse: collapse }">
+    <div class="collapse-aside" role="button" @click.stop="toogleCollapse">
+      <span>
+        <i class="fas fa-caret-right" :class="{ collapse: collapse }"></i>
+      </span>
+    </div>
+    <div class="course-details" :class="{ collapse: collapse }">
       <div
         class="progress-bar"
         :style="{
@@ -65,7 +78,7 @@ export default {
       </div>
     </div>
     <hr />
-    <div class="module-content">
+    <div class="module-content" :class="{ collapse: collapse }">
       <ul class="modules" role="list">
         <li
           v-for="(moduleItem, index) in courseStore.courseSelected.modules"

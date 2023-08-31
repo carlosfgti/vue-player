@@ -19,4 +19,13 @@ aside {
   width: 350px;
   height: calc(100vh - 80px);
   background-color: $dark-light;
+  position: relative;
+
+  &.collapse {
+    width: 15px;
+  }
+
+  @include respond-to('big') {
+    position: absolute;
+  }
 }
