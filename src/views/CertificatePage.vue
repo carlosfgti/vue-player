@@ -12,14 +12,37 @@ export default {
     const loading = ref(true)
     const courseStore = useCoursesStore()
     const route = useRoute()
-    const certificate = ref(null)
+    const certificate = ref({
+      identify: '',
+      date_finished: '',
+      user: {
+        name: ''
+      },
+      course: {
+        name: '',
+        certificate_time: ''
+      }
+    })
     const viewShare = route.query.share
     const url = window.location.origin + window.location.pathname
 
     onMounted(() => {
       courseStore
         .getCertificate(route.params.identify.toString())
-        .then((response) => (certificate.value = response.data.data))
+        .then((response) => {
+          const info = response.data.data
+          certificate.value = {
+            identify: info.identify,
+            date_finished: info.date_finished,
+            user: {
+              name: info.user.name
+            },
+            course: {
+              name: info.course.name,
+              certificate_time: info.course.certificate_time,
+            }
+          }
+        })
         .catch(() => router.push({ name: 'my.courses' }))
         .finally(() => (loading.value = false))
     })
@@ -27,7 +50,7 @@ export default {
     const copyCertificate = () => {
       navigator.clipboard.writeText(url).then(
         () => {},
-        (err) => {}
+        () => {}
       )
     }
 
