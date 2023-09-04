@@ -49,8 +49,8 @@ export default {
 
     const copyCertificate = () => {
       navigator.clipboard.writeText(url).then(
-        () => {},
-        () => {}
+        () => { console.log('cp') },
+        () => { }
       )
     }
 
@@ -90,38 +90,23 @@ export default {
         <div class="share-content" v-if="viewShare">
           <ul class="items" role="list">
             <li>
-              <a
-                :href="`https://api.whatsapp.com/send?text=${url}`"
-                target="_blank"
-                title="Compartilhar no Whatsapp"
-              >
+              <a :href="`https://api.whatsapp.com/send?text=${url}`" target="_blank" title="Compartilhar no Whatsapp">
                 <i class="fab fa-whatsapp"></i>
               </a>
             </li>
             <li>
-              <a
-                :href="`http://www.linkedin.com/shareArticle?url=${url}`"
-                target="_blank"
-                title="Compartilhar no LinkedIn"
-              >
+              <a :href="`http://www.linkedin.com/shareArticle?url=${url}`" target="_blank"
+                title="Compartilhar no LinkedIn">
                 <i class="fab fa-linkedin"></i>
               </a>
             </li>
             <li>
-              <a
-                :href="`http://www.facebook.com/sharer.php?u=${url}`"
-                target="_blank"
-                title="Compartilhar no Facebook"
-              >
+              <a :href="`http://www.facebook.com/sharer.php?u=${url}`" target="_blank" title="Compartilhar no Facebook">
                 <i class="fab fa-facebook"></i>
               </a>
             </li>
             <li>
-              <a
-                :href="`https://twitter.com/share?url=${url}`"
-                target="_blank"
-                title="Compartilhar no Twitter"
-              >
+              <a :href="`https://twitter.com/share?url=${url}`" target="_blank" title="Compartilhar no Twitter">
                 <i class="fab fa-twitter fa-fw"></i>
               </a>
             </li>
@@ -139,11 +124,7 @@ export default {
         </div>
         <div class="certificate-content">
           <div v-if="certificate" class="certificate">
-            <img
-              :src="bgCertificate"
-              class="img-back-cert"
-              alt="Certificado Digital EspecializaTi"
-            />
+            <img :src="bgCertificate" class="img-back-cert" alt="Certificado Digital EspecializaTi" />
             <div class="infos">
               <div class="title">CERTIFICADO</div>
 
