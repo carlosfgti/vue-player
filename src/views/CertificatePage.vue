@@ -49,7 +49,7 @@ export default {
 
     const copyCertificate = () => {
       navigator.clipboard.writeText(url).then(
-        () => { console.log('cp') },
+        () => { },
         () => { }
       )
     }
