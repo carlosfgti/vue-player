@@ -4,12 +4,14 @@ import { useCoursesStore } from '@/store/courses'
 import { onMounted, ref } from 'vue'
 import router from '@/router'
 import NavbarComponent from '@/components/NavbarComponent.vue'
+import { useLessonsStore } from '@/store/lessons'
 
 export default {
   name: 'MyCourses',
 
   setup() {
     const courseStore = useCoursesStore()
+    const lessonStore = useLessonsStore()
     const loading = ref(false)
     const filter = ref('')
 
@@ -27,6 +29,8 @@ export default {
 
     const setCourseSelected = (course: Course) => {
       courseStore.courseSelected = course
+      // clear lesson in player
+      lessonStore.lessonPlayer = null
       router.push({ name: 'player' })
     }
 
