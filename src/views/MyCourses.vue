@@ -85,7 +85,9 @@ export default {
       setCourseSelected,
       nextPage,
       previousPage,
-      getCertificate
+      getCertificate,
+      filter,
+      fetchMyCourses
     }
   },
 
@@ -107,6 +109,15 @@ export default {
           <i class="fas fa-books"></i>
           Meus Cursos
         </span>
+        <form class="filter" action="#" method="get" @submit.prevent="fetchMyCourses(1, filter)">
+          <input
+            type="text"
+            name="filter"
+            placeholder="Buscar Cursos (enter)"
+            v-model="filter"
+            :class="['filter', { searching: loading }]"
+          />
+        </form>
         <div class="courses">
           <div
             class="card"
@@ -169,5 +180,5 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-@import '../styles/pages/MyCoursesPage.scss';
+@import '@/styles/pages/MyCoursesPage.scss';
 </style>

@@ -136,3 +136,24 @@
     }
   }
 }
+
+form.filter {
+  margin-bottom: 20px;
+  text-align: center;
+  input.filter {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    flex-grow: 1;
+    width: 500px;
+    max-width: 100%;
+  }
+
+  input.searching {
+    pointer-events: none;
+    background-color: #f0f0f0;
+    color: #999;
+    cursor: not-allowed;
+  }
+}
