@@ -17,10 +17,17 @@ export default {
 
     const fetchMyCourses = (page: number, filter: string) => {
       loading.value = true
-      courseStore.fetchMyCourses(page, filter).finally(() => {
-        loading.value = false
-        calcProgressBar()
-      })
+      courseStore
+        .fetchMyCourses(page, filter)
+        .catch((error) => {
+          if (error.response.status === 403 && error.response.data.user_blocked === true) {
+            router.push({ name: 'block' })
+          }
+        })
+        .finally(() => {
+          loading.value = false
+          calcProgressBar()
+        })
     }
 
     onMounted(() => {
