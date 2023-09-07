@@ -60,8 +60,12 @@ export default {
       <div class="menu-content">
         <div class="user-info">
           <img v-if="userStore.user.image" :src="userStore.user.image" :alt="userStore.user.name" />
-          <img v-else src="https://picsum.photos/200" :alt="userStore.user?.name" />
-          <span class="title">Bem vindo!</span>
+          <img
+            v-else
+            :src="userStore.user?.image ?? 'https://picsum.photos/200'"
+            :alt="userStore.user?.name"
+          />
+          <span class="title">Bem vindo(a)!</span>
           <span class="name">{{ userStore.user?.name }}!</span>
         </div>
         <ul class="nav" role="list">
@@ -77,4 +81,3 @@ export default {
 <style lang="scss" scoped>
 @import '../styles/components/NavbarComponent.scss';
 </style>
-
