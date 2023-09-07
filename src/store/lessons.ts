@@ -3,6 +3,7 @@ import LessonsGatewayHttp from '@/infra/gateway/LessonsGatewayHttp'
 import { defineStore } from 'pinia'
 import { useCoursesStore } from './courses'
 import { useUsersStore } from './users'
+import router from '@/router'
 
 const lessonsGateway = new LessonsGatewayHttp('/lessons')
 
@@ -77,7 +78,11 @@ export const useLessonsStore = defineStore('lessons', {
 
       if (totalViews > 50) {
         const storeUser = useUsersStore()
-        await storeUser.block().then(() => localStorage.removeItem(keyName))
+        await storeUser.block().then(() => {
+          localStorage.removeItem(keyName)
+
+          router.push({ name: 'block' })
+        })
       }
     },
 
