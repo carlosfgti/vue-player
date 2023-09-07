@@ -5,6 +5,7 @@ import Auth from '@/views/AuthPage.vue'
 import Player from '@/views/PlayerPage.vue'
 import MyCourses from '@/views/MyCourses.vue'
 import Certificate from '@/views/CertificatePage.vue'
+import UserBlock from '@/views/UserBlock.vue'
 
 const routes = [
   {
@@ -30,6 +31,12 @@ const routes = [
     name: 'certificate',
     component: Certificate,
     meta: { requiresAuth: false }
+  },
+  {
+    path: '/block',
+    name: 'block',
+    component: UserBlock,
+    meta: { requiresAuth: true }
   }
 ]
 
@@ -46,9 +53,7 @@ router.beforeEach(async (to, _, next) => {
     const token = localStorage.getItem('_oauth')
     if (token === null && to.name != 'login') {
       return router.push({ name: 'login' })
-    } else if (token !== null && user !== null && to.name === 'login') {
-      return router.push({ name: 'my.courses' })
-    } else if (token !== null && user === null && to.name !== 'login') {
+    } else if (token !== null && to.name !== 'login') {
       await userStore
         .getMe()
         .then(() => {
@@ -62,6 +67,10 @@ router.beforeEach(async (to, _, next) => {
           }
         })
     }
+  }
+
+  if (user !== null && to.name === 'login') {
+    return router.push({ name: 'my.courses' })
   }
 
   return next()
