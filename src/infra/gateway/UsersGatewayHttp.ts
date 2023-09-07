@@ -35,9 +35,9 @@ export default class UsersGatewayHttp implements UsersGateway {
       .then((response) => localStorage.setItem('_oauth', response.data.token))
   }
 
-  async logout(): Promise<void> {
+  async logout(): Promise<any> {
     const token = localStorage.getItem('_oauth')
-    await this.httpClient
+    return await this.httpClient
       .post(
         '/logout',
         {},

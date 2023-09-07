@@ -15,8 +15,8 @@ export const useUsersStore = defineStore('users', {
     async login(email: string, password: string) {
       return await usersGateway.login(email, password)
     },
-    async logout() {
-      await usersGateway.logout()
+    async logout(): Promise<any> {
+      return await usersGateway.logout().then(() => (this.user = null))
     },
     async block(): Promise<any> {
       this.user?.block()
