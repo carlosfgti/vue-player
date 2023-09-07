@@ -59,11 +59,10 @@ export default {
       </span>
       <div class="menu-content">
         <div class="user-info">
-          <img v-if="userStore.user.image" :src="userStore.user.image" :alt="userStore.user.name" />
           <img
-            v-else
-            :src="userStore.user?.image ?? 'https://picsum.photos/200'"
-            :alt="userStore.user?.name"
+            :src="userStore.user.image || 'https://picsum.photos/200'"
+            :alt="userStore.user.name"
+            onerror="javascript:this.src='https://picsum.photos/200'"
           />
           <span class="title">Bem vindo(a)!</span>
           <span class="name">{{ userStore.user?.name }}!</span>
