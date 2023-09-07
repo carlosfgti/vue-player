@@ -23,15 +23,9 @@ export default class UsersGatewayHttp implements UsersGateway {
           localStorage.removeItem('_oauth')
         }
       })
-    const { url, name, blocked, email } = response.data.data
+    const { url, name, blocked, email, image } = response.data.data
 
-    return new User(
-      url,
-      name,
-      email,
-      !!blocked
-      // data.image,
-    )
+    return new User(url, name, email, !!blocked, image)
   }
 
   async login(email: string, password: string): Promise<any> {
