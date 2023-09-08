@@ -138,22 +138,52 @@
 }
 
 form.filter {
-  margin-bottom: 20px;
-  text-align: center;
-  input.filter {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    flex-grow: 1;
-    width: 500px;
-    max-width: 100%;
+  margin-bottom: 1rem;
+
+  .search-controll {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 1rem;
+    background-color: $dark;
+    outline: 1px solid $dark;
+    border-radius: 100px;
+    font-size: $font-size-small;
+    max-width: 500px;
+    margin: 0 auto;
+    transition: 0.5s outline;
+
+    &:focus-within {
+      outline: 1px solid $primary;
+    }
   }
 
-  input.searching {
-    pointer-events: none;
-    background-color: #f0f0f0;
-    color: #999;
-    cursor: not-allowed;
+  input.filter {
+    font-size: 16px;
+    flex: 1;
+    outline: none;
+    border: none;
+    text-indent: 5px;
+    background-color: transparent;
+    color: $light;
+
+    &.searching {
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+
+    &:-webkit-autofill {
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: $light;
+    }
+  }
+
+  button {
+    margin-left: 1rem;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: $primary;
+    cursor: pointer;
   }
 }

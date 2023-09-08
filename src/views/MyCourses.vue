@@ -110,13 +110,18 @@ export default {
           Meus Cursos
         </span>
         <form class="filter" action="#" method="get" @submit.prevent="fetchMyCourses(1, filter)">
-          <input
-            type="text"
-            name="filter"
-            placeholder="Buscar Cursos (enter)"
-            v-model="filter"
-            :class="['filter', { searching: loading }]"
-          />
+          <div class="search-controll">
+            <input
+              type="text"
+              name="filter"
+              placeholder="Buscar Cursos (enter)"
+              v-model="filter"
+              :class="['filter', { searching: loading }]"
+            />
+            <button type="submit">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
         </form>
         <div class="courses">
           <div
